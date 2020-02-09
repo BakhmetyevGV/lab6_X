@@ -1,0 +1,6 @@
+lab6/actors/ConfigStoreActor.class
+lab6/messages/GetRandomServerMessage.class
+lab6/messages/SetServerListMessage.class
+lab6/app/Launcher.class
+lab6/app/ZookeeperService.class
+lab6/app/Server.class
