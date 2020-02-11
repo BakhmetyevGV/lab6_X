@@ -9,8 +9,9 @@ public class Launcher {
         ActorRef actor = sys.actorOf(Props.create(Actor.class));
 
         Http http = Http.get(sys);
-    }
 
+
+    }
 }
 
 
