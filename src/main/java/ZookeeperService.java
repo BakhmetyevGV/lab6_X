@@ -1,6 +1,8 @@
 import akka.actor.ActorRef;
 import org.apache.zookeeper.ZooKeeper;
 
+import java.io.IOException;
+
 public class ZookeeperService {
     private static final String ZOOKEEPER_CONNECT_STRING = "127.0.0.1:2181";
     private static final String ROOT_PATH = "/servers";
@@ -8,4 +10,8 @@ public class ZookeeperService {
 
     private ZooKeeper zooKeeper;
     private ActorRef actorRef;
+
+    private ZooKeeper createZooKeeper() throws IOException {
+        return new ZooKeeper(ZOOKEEPER_CONNECT_STRING, SESSION_TIMEOUT, null);
+    }
 }
