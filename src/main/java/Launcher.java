@@ -33,7 +33,7 @@ public class Launcher {
         // Создание нового узла
         String znodePath = "/clientQ";
         if (zooKeeper.exists(znodePath, false) == null) {
-            zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT_SEQUENTIAL);
+            zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.EPHEMERAL_SEQUENTIAL);
         }
 
 //        String znodePath2 = "/servers/s";
