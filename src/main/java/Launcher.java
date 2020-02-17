@@ -38,18 +38,13 @@ public class Launcher {
             zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT_SEQUENTIAL);
         }
 
-        String znodePath2 = "/servers/s";
-        byte[] cmd = "GET http://localhost:8094/?url=https://www.google.com".getBytes();
-
-        if (zooKeeper.exists(znodePath2, false) == null) {
-            zooKeeper.create(znodePath2, cmd, ACLS, CreateMode.PERSISTENT_SEQUENTIAL);
-        }
-
-//        zooKeeper.create("/clientQueue/msg",
-//                "GET http://localhost:8094/?url=https://www.google.com".getBytes(),
-//                ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
-
-        // Получение данных из узла
+//        String znodePath2 = "/servers/s";
+//        byte[] cmd = "GET http://localhost:8094/?url=https://www.google.com".getBytes();
+//
+//        if (zooKeeper.exists(znodePath2, false) == null) {
+//            zooKeeper.create(znodePath2, cmd, ACLS, CreateMode.PERSISTENT_SEQUENTIAL);
+//        }
+        
         byte[] data = zooKeeper.getData(znodePath, null, null);
         System.out.println("Result: " + new String(data, "UTF-8"));
 
