@@ -10,6 +10,7 @@ public class Launcher {
 
         Http http = Http.get(sys);
 
+        String server = "127.0.0.1:2181";
 
     }
 }
