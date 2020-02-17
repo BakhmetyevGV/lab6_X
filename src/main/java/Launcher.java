@@ -4,9 +4,12 @@ import akka.actor.Props;
 import akka.http.javadsl.Http;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
+import org.apache.zookeeper.ZooKeeper;
+
+import java.io.IOException;
 
 public class Launcher {
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException, IOException {
         ActorSystem sys = ActorSystem.create("noname");
         ActorRef actor = sys.actorOf(Props.create(Actor.class));
 
@@ -25,6 +28,15 @@ public class Launcher {
                 }
             }
         };
+
+        int sessionTimeout = 2000;
+        ZooKeeper zooKeeper = null;
+        synchronized (lock) {
+            zooKeeper = new ZooKeeper(server, sessionTimeout, connectionWatcher);
+            lock.wait();
+        }
+
+        
 
     }
 }
