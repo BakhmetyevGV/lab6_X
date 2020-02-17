@@ -24,7 +24,6 @@ public class Launcher {
             }
         };
 
-
         ZooKeeper zooKeeper = null;
         synchronized (lock) {
             zooKeeper = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
@@ -33,7 +32,6 @@ public class Launcher {
 
         // Создание нового узла
         String znodePath = "/servers/s";
-        //List<ACL> acls = ZooDefs.Ids.OPEN_ACL_UNSAFE;
         if (zooKeeper.exists(znodePath, false) == null) {
             zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT_SEQUENTIAL);
         }
@@ -44,7 +42,7 @@ public class Launcher {
 //        if (zooKeeper.exists(znodePath2, false) == null) {
 //            zooKeeper.create(znodePath2, cmd, ACLS, CreateMode.PERSISTENT_SEQUENTIAL);
 //        }
-        
+
         byte[] data = zooKeeper.getData(znodePath, null, null);
         System.out.println("Result: " + new String(data, "UTF-8"));
 
