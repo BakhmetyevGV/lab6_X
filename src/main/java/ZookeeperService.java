@@ -1,4 +1,7 @@
 import akka.actor.ActorRef;
+import org.apache.zookeeper.CreateMode;
+import org.apache.zookeeper.KeeperException;
+import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
@@ -12,8 +15,22 @@ public class ZookeeperService {
     private ZooKeeper zooKeeper;
     private ActorRef actorRef;
 
-    private ZooKeeper createZooKeeper(ActorRef configStoreActor) throws IOException {
+    public ZookeeperService() throws IOException {
         this.actorRef = actorRef;
-        return new ZooKeeper(ZOOKEEPER_CONNECT_STRING, SESSION_TIMEOUT, null);
+        this.zooKeeper = new ZooKeeper(ZOOKEEPER_CONNECT_STRING, SESSION_TIMEOUT, null);
     }
+
+    public void createServer(String serverUrl) throws KeeperException, InterruptedException {
+        zooKeeper.create(
+                NODES_PATH,
+                serverUrl.getBytes(),
+                ZooDefs.Ids.OPEN_ACL_UNSAFE,
+                CreateMode.EPHEMERAL_SEQUENTIAL
+        );
+    }
+
+//    private ZooKeeper createZooKeeper(ActorRef configStoreActor) throws IOException {
+//
+//        return new ZooKeeper(ZOOKEEPER_CONNECT_STRING, SESSION_TIMEOUT, null);
+//    }
 }
