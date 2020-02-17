@@ -35,7 +35,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../lab6" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -106,6 +106,7 @@
       <workItem from="1581416138673" duration="230000" />
       <workItem from="1581416385983" duration="1838000" />
       <workItem from="1581673540407" duration="1562000" />
+      <workItem from="1581951650228" duration="379000" />
     </task>
     <servers />
   </component>
@@ -129,10 +130,11 @@
       <screen x="53" y="24" width="1313" height="744" />
     </state>
     <state x="554" y="275" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/53.24.1313.744@53.24.1313.744" timestamp="1577525141654" />
-    <state x="453" y="269" key="FileChooserDialogImpl" timestamp="1581291659116">
-      <screen x="53" y="24" width="1227" height="1000" />
+    <state x="481" y="206" key="FileChooserDialogImpl" timestamp="1581951988627">
+      <screen x="53" y="24" width="1313" height="744" />
     </state>
     <state x="453" y="269" key="FileChooserDialogImpl/53.24.1227.1000@53.24.1227.1000" timestamp="1581291659116" />
+    <state x="481" y="206" key="FileChooserDialogImpl/53.24.1313.744@53.24.1313.744" timestamp="1581951988627" />
     <state width="1267" height="126" key="GridCell.Tab.0.bottom" timestamp="1577532810455">
       <screen x="53" y="24" width="1313" height="744" />
     </state>
