@@ -40,11 +40,16 @@ public class Launcher {
         String znodePath = "/clientQueue";
         List<ACL> acls = ZooDefs.Ids.OPEN_ACL_UNSAFE;
         if (zooKeeper.exists(znodePath, false) == null) {
-            zooKeeper.create(znodePath, "data".getBytes(), acls, CreateMode.PERSISTENT);
+            zooKeeper.create(znodePath, "data".getBytes(), acls, CreateMode.PERSISTENT_SEQUENTIAL);
+        }
+
+        String znodePath2 = "/clientQueue" + "/msg";
+        if (zooKeeper.exists(znodePath2, false) == null) {
+            zooKeeper.create(znodePath2, "data".getBytes(), acls, CreateMode.PERSISTENT);
         }
 
         zooKeeper.create("/clientQueue/msg",
-                "GET http://localhost:8094/?url=https://www.google.com/&count=2".getBytes(),
+                "GET http://localhost:8094/?url=https://www.google.com".getBytes(),
                 ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
 
         // Получение данных из узла
