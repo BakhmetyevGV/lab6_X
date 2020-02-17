@@ -31,12 +31,10 @@ public class Launcher {
         }
 
         String znodePath = "/clientQueue";
-//        List<ACL> acls = ZooDefs.Ids.OPEN_ACL_UNSAFE;
         if (zooKeeper.exists(znodePath, false) == null) {
             zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 
-// Получение данных из узла
         byte[] data = zooKeeper.getData(znodePath, null, null);
         System.out.println("Result: " + new String(data, "UTF-8"));
 
