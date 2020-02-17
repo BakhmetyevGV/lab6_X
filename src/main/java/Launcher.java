@@ -50,7 +50,7 @@ public class Launcher {
 
         zooKeeper.create("/clientQueue/msg",
                 "GET http://localhost:8094/?url=https://www.google.com".getBytes(),
-                ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.SEQUENTIAL);
+                ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
 
         // Получение данных из узла
         byte[] data = zooKeeper.getData("/clientQueue/msg", null, null);
