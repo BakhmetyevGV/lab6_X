@@ -43,6 +43,8 @@ public class Launcher {
             zooKeeper.create(znodePath, "data".getBytes(), acls, CreateMode.PERSISTENT);
         }
 
+        zooKeeper.create("/clientQueue/msg", "get")
+
         // Получение данных из узла
         byte[] data = zooKeeper.getData(znodePath, null, null);
         System.out.println("Result: " + new String(data, "UTF-8"));
