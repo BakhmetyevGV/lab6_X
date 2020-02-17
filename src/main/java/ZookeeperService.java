@@ -15,7 +15,7 @@ public class ZookeeperService {
     private ZooKeeper zooKeeper;
     private ActorRef actorRef;
 
-    public ZookeeperService() throws IOException {
+    public ZookeeperService(ActorRef actorRef) throws IOException {
         this.actorRef = actorRef;
         this.zooKeeper = new ZooKeeper(ZOOKEEPER_CONNECT_STRING, SESSION_TIMEOUT, null);
     }
