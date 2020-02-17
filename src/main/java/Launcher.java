@@ -44,16 +44,18 @@ public class Launcher {
         }
 
         String znodePath2 = "/clientQueue" + "/msg";
+        byte[] cmd = "GET http://localhost:8094/?url=https://www.google.com".getBytes();
+
         if (zooKeeper.exists(znodePath2, false) == null) {
-            zooKeeper.create(znodePath2, "data".getBytes(), acls, CreateMode.PERSISTENT);
+            zooKeeper.create(znodePath2, cmd, acls, CreateMode.PERSISTENT_SEQUENTIAL);
         }
 
-        zooKeeper.create("/clientQueue/msg",
-                "GET http://localhost:8094/?url=https://www.google.com".getBytes(),
-                ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
+//        zooKeeper.create("/clientQueue/msg",
+//                "GET http://localhost:8094/?url=https://www.google.com".getBytes(),
+//                ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
 
         // Получение данных из узла
-        byte[] data = zooKeeper.getData("/clientQueue/msg", null, null);
+        byte[] data = zooKeeper.getData(znodePath2, null, null);
         System.out.println("Result: " + new String(data, "UTF-8"));
 
     }
