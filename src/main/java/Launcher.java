@@ -30,7 +30,7 @@ public class Launcher {
             lock.wait();
         }
 
-        String znodePath = "/zookeepernode2";
+        String znodePath = "/clientQueue";
 //        List<ACL> acls = ZooDefs.Ids.OPEN_ACL_UNSAFE;
         if (zooKeeper.exists(znodePath, false) == null) {
             zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
