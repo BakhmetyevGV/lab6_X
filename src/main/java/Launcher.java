@@ -40,7 +40,7 @@ public class Launcher {
             zooKeeper.create(znodePath2, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 
-        byte[] data = zooKeeper.getData(znodePath, null, null);
+        byte[] data = zooKeeper.getData(znodePath2, null, null);
         System.out.println("Result: " + new String(data, "UTF-8"));
 
     }
