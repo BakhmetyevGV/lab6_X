@@ -55,7 +55,7 @@ public class Launcher {
 //                ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT_SEQUENTIAL);
 
         // Получение данных из узла
-        byte[] data = zooKeeper.getData(znodePath2, null, null);
+        byte[] data = zooKeeper.getData(znodePath, null, null);
         System.out.println("Result: " + new String(data, "UTF-8"));
 
     }
