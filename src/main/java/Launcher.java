@@ -2,14 +2,14 @@ import akka.actor.ActorRef;
 import akka.actor.ActorSystem;
 import akka.actor.Props;
 import akka.http.javadsl.Http;
-import org.apache.zookeeper.WatchedEvent;
-import org.apache.zookeeper.Watcher;
-import org.apache.zookeeper.ZooKeeper;
+import org.apache.zookeeper.*;
+import org.apache.zookeeper.data.ACL;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Launcher {
-    public static void main(String[] args) throws InterruptedException, IOException {
+    public static void main(String[] args) throws InterruptedException, IOException, KeeperException {
         ActorSystem sys = ActorSystem.create("noname");
         ActorRef actor = sys.actorOf(Props.create(Actor.class));
 
@@ -36,7 +36,16 @@ public class Launcher {
             lock.wait();
         }
 
-        
+        // Создание нового узла
+        String znodePath = "/zookeepernode2";
+        List<ACL> acls = ZooDefs.Ids.OPEN_ACL_UNSAFE;
+        if (zooKeeper.exists(znodePath, false) == null) {
+            zooKeeper.create(znodePath, "data".getBytes(), acls, CreateMode.PERSISTENT);
+        }
+
+        // Получение данных из узла
+        byte[] data = zooKeeper.getData(znodePath, null, null);
+        System.out.println("Result: " + new String(data, "UTF-8"));
 
     }
 }
