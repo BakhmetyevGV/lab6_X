@@ -37,7 +37,7 @@ public class Launcher {
         }
 
         // Создание нового узла
-        String znodePath = "/zookeepernode2";
+        String znodePath = "/zookeepernode1";
         List<ACL> acls = ZooDefs.Ids.OPEN_ACL_UNSAFE;
         if (zooKeeper.exists(znodePath, false) == null) {
             zooKeeper.create(znodePath, "data".getBytes(), acls, CreateMode.PERSISTENT);
