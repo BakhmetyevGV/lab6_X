@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4349a14-0ee0-4ccc-9ea7-86f68be713b3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Launcher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -109,7 +108,7 @@
       <workItem from="1581416138673" duration="230000" />
       <workItem from="1581416385983" duration="1838000" />
       <workItem from="1581673540407" duration="1562000" />
-      <workItem from="1581951650228" duration="7885000" />
+      <workItem from="1581951650228" duration="7975000" />
     </task>
     <servers />
   </component>
@@ -171,9 +170,9 @@
       <screen x="53" y="24" width="1313" height="744" />
     </state>
     <state x="53" y="24" key="new project wizard/53.24.1313.744@53.24.1313.744" timestamp="1581678932509" />
-    <state x="372" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1581416746657">
+    <state x="372" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1581972408936">
       <screen x="53" y="24" width="1313" height="744" />
     </state>
-    <state x="372" y="89" width="672" height="678" key="search.everywhere.popup/53.24.1313.744@53.24.1313.744" timestamp="1581416746657" />
+    <state x="372" y="89" width="672" height="678" key="search.everywhere.popup/53.24.1313.744@53.24.1313.744" timestamp="1581972408936" />
   </component>
 </project>
