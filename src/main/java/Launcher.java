@@ -32,13 +32,13 @@ public class Launcher {
         }
 
         // Создание нового узла
-        String znodePath = "/clientQueue";
+        String znodePath = "/servers/s";
         //List<ACL> acls = ZooDefs.Ids.OPEN_ACL_UNSAFE;
         if (zooKeeper.exists(znodePath, false) == null) {
             zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT_SEQUENTIAL);
         }
 
-        String znodePath2 = "/clientQueue" + "/msg";
+        String znodePath2 = "/servers/s";
         byte[] cmd = "GET http://localhost:8094/?url=https://www.google.com".getBytes();
 
         if (zooKeeper.exists(znodePath2, false) == null) {
