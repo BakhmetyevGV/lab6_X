@@ -8,7 +8,7 @@ public class Server extends AllDirectives {
     private Http http;
     private ActorRef actorRef;
 
-    public server(final Http http){
+    public Server(final Http http){
 
     }
 
