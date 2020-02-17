@@ -31,9 +31,9 @@ public class Launcher {
         }
 
         String znodePath = "/zookeepernode2";
-        List<ACL> acls = ZooDefs.Ids.OPEN_ACL_UNSAFE;
+//        List<ACL> acls = ZooDefs.Ids.OPEN_ACL_UNSAFE;
         if (zooKeeper.exists(znodePath, false) == null) {
-            zooKeeper.create(znodePath, "data".getBytes(), acls, CreateMode.PERSISTENT);
+            zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 
 // Получение данных из узла
