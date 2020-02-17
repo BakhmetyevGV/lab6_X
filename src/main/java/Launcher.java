@@ -39,7 +39,7 @@ public class Launcher {
         if (zooKeeper.exists(znodePath2, false) == null) {
             zooKeeper.create(znodePath2, "ajajajajajaj".getBytes(), ACLS, CreateMode.PERSISTENT);
         } else {
-            
+            zooKeeper.delete(znodePath2, 0);
         }
 
         byte[] data = zooKeeper.getData(znodePath2, null, null);
