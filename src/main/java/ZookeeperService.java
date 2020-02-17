@@ -12,7 +12,8 @@ public class ZookeeperService {
     private ZooKeeper zooKeeper;
     private ActorRef actorRef;
 
-    private ZooKeeper createZooKeeper() throws IOException {
+    private ZooKeeper createZooKeeper(ActorRef configStoreActor) throws IOException {
+        this.actorRef = actorRef;
         return new ZooKeeper(ZOOKEEPER_CONNECT_STRING, SESSION_TIMEOUT, null);
     }
 }
