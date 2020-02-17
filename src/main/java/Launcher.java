@@ -10,10 +10,10 @@ import java.util.List;
 
 public class Launcher {
     public static void main(String[] args) throws InterruptedException, IOException, KeeperException {
-        ActorSystem sys = ActorSystem.create("noname");
-        ActorRef actor = sys.actorOf(Props.create(Actor.class));
+        //ActorSystem sys = ActorSystem.create("noname");
+        //ActorRef actor = sys.actorOf(Props.create(Actor.class));
 
-        Http http = Http.get(sys);
+        //Http http = Http.get(sys);
 
         String server = "127.0.0.1:2181";
         Object lock = new Object();
