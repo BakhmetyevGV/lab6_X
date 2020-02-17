@@ -16,4 +16,8 @@ public class Server extends AllDirectives {
         this.actorRef = actorRef;
     }
 
+    private void initZookeeper(int port)  throws IOException, KeeperException, InterruptedException {
+        ZookeeperService zookeeperService = new ZookeeperService(actorRef);
+    }
+
 }
