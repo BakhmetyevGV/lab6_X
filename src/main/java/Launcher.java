@@ -46,7 +46,7 @@ public class Launcher {
         byte[] data = zooKeeper.getData(znodePath2, null, null);
         System.out.println("Result: " + new String(data, "UTF-8"));
 
-        for(node : zooKeeper.getChildren(znodePath, false)){
+        for(String node : zooKeeper.getChildren(znodePath, false)){
             System.out.println(node);
         }
 
