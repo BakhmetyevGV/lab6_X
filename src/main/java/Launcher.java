@@ -37,7 +37,7 @@ public class Launcher {
 
         String znodePath2 = "/clientQueue/msg";
         if (zooKeeper.exists(znodePath2, false) == null) {
-            zooKeeper.create(znodePath2, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
+            zooKeeper.create(znodePath2, "ajajajajajaj".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 
         byte[] data = zooKeeper.getData(znodePath2, null, null);
