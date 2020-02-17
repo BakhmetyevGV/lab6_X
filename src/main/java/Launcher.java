@@ -30,19 +30,13 @@ public class Launcher {
             lock.wait();
         }
 
-        // Создание нового узла
-        String znodePath = "/clientQ";
+        String znodePath = "/zookeepernode2";
+        List<ACL> acls = ZooDefs.Ids.OPEN_ACL_UNSAFE;
         if (zooKeeper.exists(znodePath, false) == null) {
-            zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.EPHEMERAL_SEQUENTIAL);
+            zooKeeper.create(znodePath, "data".getBytes(), acls, CreateMode.PERSISTENT);
         }
 
-//        String znodePath2 = "/servers/s";
-//        byte[] cmd = "GET http://localhost:8094/?url=https://www.google.com".getBytes();
-//
-//        if (zooKeeper.exists(znodePath2, false) == null) {
-//            zooKeeper.create(znodePath2, cmd, ACLS, CreateMode.PERSISTENT_SEQUENTIAL);
-//        }
-
+// Получение данных из узла
         byte[] data = zooKeeper.getData(znodePath, null, null);
         System.out.println("Result: " + new String(data, "UTF-8"));
 
