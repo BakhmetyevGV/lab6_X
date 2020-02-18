@@ -12,9 +12,6 @@ import java.util.List;
 
 
 public class Launcher {
-    private static final String ZOOKEEPER_SERVER = "127.0.0.1:2181";
-    private static final int SESSION_TIMEOUT = 5000;
-    private static final List<ACL> ACLS = ZooDefs.Ids.OPEN_ACL_UNSAFE;
 
     public static void main(String[] args) throws InterruptedException, IOException, KeeperException {
         ActorSystem sys = ActorSystem.create("noname");
@@ -22,7 +19,6 @@ public class Launcher {
         Http http = Http.get(sys);
         int serverPort = Integer.parseInt(args[0]);
 
-        Server server = new Server(http, serverPort);
 
         Watcher connectionWatcher = we -> {
             if (we.getState() == Watcher.Event.KeeperState.SyncConnected) {
@@ -41,7 +37,7 @@ public class Launcher {
             System.out.println("state: " + we.getState());
         };
 
-        ZooKeeper zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
+        ZooKeeper zk = ZookeeperService
 
 
 //        zk.delete(znodePath + "/msg0000000022",
