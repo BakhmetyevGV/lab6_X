@@ -39,6 +39,8 @@ public class Launcher {
         zookeeperService.createClientNode();
         zookeeperService.createServerNode();
 
+        Server server = new Server(http, serverPort, httpActor);
+
 //        zk.delete(znodePath + "/msg0000000022",
 //                zk.exists(znodePath + "/msg0000000022", false).getVersion());
 

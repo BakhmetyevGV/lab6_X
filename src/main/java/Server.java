@@ -2,6 +2,7 @@ import akka.actor.ActorRef;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.server.AllDirectives;
+import akka.http.javadsl.server.Route;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
@@ -43,7 +44,7 @@ public class Server extends AllDirectives {
                 nodePath = "/clientQueue";
                 dataNode = "/clientQueue/msg";
 
-                initWatcher();
+                initWatcher(SERVER_MODE);
                 /*...*/
                 break;
             default:
@@ -52,21 +53,19 @@ public class Server extends AllDirectives {
         }
 
     }
-    private void initWatcher(int mode){
+
+    private void initWatcher(int mode) {
         watcher = we -> {
             if (we.getType() == Watcher.Event.EventType.NodeCreated) {
                 try {
                     byte[] data = zk.getData(dataNode, true, zk.exists(dataNode, true)); //TODO
-                    zk.delete(nodePath, zk.exists(nodePath,false).getVersion());
+                    zk.delete(nodePath, zk.exists(nodePath, false).getVersion());
 
-                    if(mode == CLIENT_MODE){
+                    if (mode == CLIENT_MODE) {
                         System.out.println(new String(data, "UTF-8"));
-                        zk.delete(nodePath, zk.exists(nodePath,false).getVersion());
-                    } else if(mode == SERVER_MODE){
+                    } else if (mode == SERVER_MODE) {
                         handleHttp(new String(data, "UTF-8"));
                     }
-
-
 
 
                 } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {
@@ -81,11 +80,18 @@ public class Server extends AllDirectives {
         };
     }
 
+    public Route createRoute() {
+        return get(() ->
+                parameter("url", url -> {
+                    return completeWithFuture(http.singleRequest(HttpRequest.create(url)));
+                }));
+    }
+
     private void watchNodes() throws KeeperException, InterruptedException {
         zk.exists(nodePath, watcher);
     }
 
-    private void handleHttp(String data){
+    private void handleHttp(String data) {
 
     }
 
