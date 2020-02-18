@@ -15,7 +15,7 @@ public class Server extends AllDirectives {
     private static final int SERVER_MODE = 1;
 
     private Http http;
-    private ActorRef httpActor;
+    //private ActorRef httpActor;
     private int port;
     private ZookeeperService zookeeperService;
     private ZooKeeper zk;
@@ -24,11 +24,11 @@ public class Server extends AllDirectives {
     private String nodePath;
     private String dataNode;
 
-    public Server(final Http http, int port, ActorRef httpActor) throws IOException, KeeperException, InterruptedException {
+    public Server(int port) throws IOException, KeeperException, InterruptedException {
         this.http = http;
         this.port = port;
-        this.httpActor = httpActor;
-        this.zookeeperService = new ZookeeperService(httpActor);
+        //this.httpActor = httpActor;
+        this.zookeeperService = new ZookeeperService();
         this.zk = this.zookeeperService.zk;
 
         switch (port) {

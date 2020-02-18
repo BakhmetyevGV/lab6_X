@@ -14,9 +14,9 @@ import java.util.List;
 public class Launcher {
 
     public static void main(String[] args) throws InterruptedException, IOException, KeeperException {
-        ActorSystem sys = ActorSystem.create("noname");
-        ActorRef httpActor = sys.actorOf(Props.create(HttpActor.class));
-        Http http = Http.get(sys);
+        //ActorSystem sys = ActorSystem.create("noname");
+        //ActorRef httpActor = sys.actorOf(Props.create(HttpActor.class));
+        //Http http = Http.get(sys);
         int serverPort = Integer.parseInt(args[0]);
 
         Watcher connectionWatcher = we -> {
@@ -35,11 +35,11 @@ public class Launcher {
             System.out.println("state: " + we.getState());
         };
 
-        ZookeeperService zookeeperService = new ZookeeperService(httpActor);
+        ZookeeperService zookeeperService = new ZookeeperService();
         zookeeperService.createClientNode();
         zookeeperService.createServerNode();
 
-        Server server = new Server(http, serverPort, httpActor);
+        Server server = new Server(serverPort);
 
 //        zk.delete(znodePath + "/msg0000000022",
 //                zk.exists(znodePath + "/msg0000000022", false).getVersion());

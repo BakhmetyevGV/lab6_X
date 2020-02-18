@@ -12,11 +12,11 @@ public class ZookeeperService {
     private static final List<ACL> ACLS = ZooDefs.Ids.OPEN_ACL_UNSAFE;
 
     public ZooKeeper zk;
-    private ActorRef httpActor;
+    //private ActorRef httpActor;
 
-    public ZookeeperService(ActorRef httpActor) throws IOException {
+    public ZookeeperService() throws IOException {
         this.zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, null);
-        this.httpActor = httpActor;
+        //this.httpActor = httpActor;
     }
 
     public void createClientNode() throws KeeperException, InterruptedException {
