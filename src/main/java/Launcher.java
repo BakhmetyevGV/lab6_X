@@ -35,8 +35,9 @@ public class Launcher {
             System.out.println("state: " + we.getState());
         };
 
-        ZookeeperService zs = new ZookeeperService(httpActor);
-        ZooKeeper zk = zs.zk;
+        ZookeeperService zookeeperService = new ZookeeperService(httpActor);
+        zookeeperService.createClientNode();
+        zookeeperService.createServerNode();
 
 //        zk.delete(znodePath + "/msg0000000022",
 //                zk.exists(znodePath + "/msg0000000022", false).getVersion());

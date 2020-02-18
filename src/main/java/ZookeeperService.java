@@ -1,4 +1,5 @@
 import akka.actor.ActorRef;
+import akka.dispatch.sysmsg.Watch;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.ACL;
 
@@ -26,9 +27,9 @@ public class ZookeeperService {
         //zk.create("/clientNode","data".getBytes(), ACLS, CreateMode.PERSISTENT);
     }
 
-    public void createServerNode(Watcher serverWatcher) throws KeeperException, InterruptedException {
+    public void createServerNode() throws KeeperException, InterruptedException {
         String znodePath = "/serverQueue";
-        if (zk.exists(znodePath, serverWatcher) == null) {
+        if (zk.exists(znodePath, false) == null) {
             zk.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
     }
