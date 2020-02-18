@@ -57,8 +57,8 @@ public class Launcher {
         Watcher clientWatcher = we -> {
             if (true) {
                 System.out.println("Connected to Zookeeper in ALSLSLSLSLSLSl " + Thread.currentThread().getName());
-                synchronized (lock) {
-                    lock.notifyAll();
+                synchronized (lock2) {
+                    lock2.notifyAll();
                 }
             }
         };
