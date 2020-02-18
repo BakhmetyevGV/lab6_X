@@ -18,7 +18,7 @@ public class Server extends AllDirectives {
     private ZooKeeper zk;
 
     private Watcher watcher;
-    private static final String NODE_PATH;
+    private String NODE_PATH;
 
     public Server(final Http http, int port, ActorRef httpActor) throws IOException {
         this.http = http;
@@ -34,10 +34,8 @@ public class Server extends AllDirectives {
                 watcher = we -> {
                     if (we.getType() == Watcher.Event.EventType.NodeCreated) {
                         try {
-                            zk.getData("/serverQueue/msg",
-                                    true,
-                                    zk.exists("/serverQueue/msg", true));
-
+                            String dataNode = NODE_PATH + "/msg";
+                            zk.getData(dataNode, true, zk.exists(dataNode, true)); //TODO
                         } catch (KeeperException | InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -63,7 +61,7 @@ public class Server extends AllDirectives {
 
     }
     private void watchNodes() throws KeeperException, InterruptedException {
-        zk.exists("/serverQueue", watcher);
+        zk.exists(NODE_PATH, watcher);
     }
 
     private void poseAsClient() throws KeeperException, InterruptedException {
