@@ -1,16 +1,20 @@
 import akka.actor.ActorRef;
 import akka.http.javadsl.Http;
+import akka.http.javadsl.model.HttpRequest;
 import akka.http.javadsl.server.AllDirectives;
 import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 public class Server extends AllDirectives {
+    private static final int CLIENT_MODE = 0;
+    private static final int SERVER_MODE = 1;
+
     private Http http;
     private ActorRef httpActor;
-
     private int port;
     private ZookeeperService zookeeperService;
     private ZooKeeper zk;
@@ -31,8 +35,8 @@ public class Server extends AllDirectives {
                 nodePath = "/serverQueue";
                 dataNode = "/serverQueue/msg";
 
-                initWatcher();
-                poseAsClient();
+                initWatcher(CLIENT_MODE);
+
                 /*...*/
                 break;
             case 8095:
@@ -48,12 +52,24 @@ public class Server extends AllDirectives {
         }
 
     }
-    private void initWatcher(){
+    private void initWatcher(int mode){
         watcher = we -> {
             if (we.getType() == Watcher.Event.EventType.NodeCreated) {
                 try {
-                    zk.getData(dataNode, true, zk.exists(dataNode, true)); //TODO
-                } catch (KeeperException | InterruptedException e) {
+                    byte[] data = zk.getData(dataNode, true, zk.exists(dataNode, true)); //TODO
+                    zk.delete(nodePath, zk.exists(nodePath,false).getVersion());
+
+                    if(mode == CLIENT_MODE){
+                        System.out.println(new String(data, "UTF-8"));
+                        zk.delete(nodePath, zk.exists(nodePath,false).getVersion());
+                    } else if(mode == SERVER_MODE){
+                        handleHttp(new String(data, "UTF-8"));
+                    }
+
+
+
+
+                } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
             }
@@ -69,11 +85,8 @@ public class Server extends AllDirectives {
         zk.exists(nodePath, watcher);
     }
 
-    private void poseAsClient() throws KeeperException, InterruptedException {
-        zookeeperService.createServerNode(watcher);
+    private void handleHttp(String data){
+
     }
 
-    private void poseAsServer() throws KeeperException, InterruptedException {
-        zookeeperService.createClientNode(watcher);
-    }
 }
