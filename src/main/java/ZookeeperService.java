@@ -22,7 +22,7 @@ public class ZookeeperService {
         this.zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, null);
         this.mode = mode;
 
-        if(mode == CLIENT_MODE){
+        if (mode == CLIENT_MODE) {
             watchServers1();
         } else {
             watchServers2();
@@ -32,50 +32,34 @@ public class ZookeeperService {
 
     private void watchServers1() {
         try {
-            List<String> msg = zk.getChildren("/serverQueue", watchedEvent -> {
-                if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
-                    System.out.println("NODE CREATED IN SERVER QUEUE");
+            zk.exists("/serverQueue/msg", watchedEvent -> {
+                if (watchedEvent.getType() == Watcher.Event.EventType.NodeCreated) {
                     watchServers1();
                 }
             });
 
-            for (String serverNodeName : msg) {
-                byte[] data = zk.getData("/serverQueue" + "/" + serverNodeName, null, null);
-                System.out.println(new String(data, "UTF-8"));
-                zk.delete(
-                        "/serverQueue" + "/" + serverNodeName,
-                        zk.exists("/serverQueue" + "/" + serverNodeName, false).getVersion());
-            }
-
-        } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {
-            e.printStackTrace();
+            byte[] data = zk.getData("/serverQueue/msg", null, null);
+            System.out.println(new String(data, "UTF-8"));
+            zk.delete("/serverQueue/msg", zk.exists("/serverQueue/msg", false).getVersion());
+        } catch (InterruptedException | UnsupportedEncodingException | KeeperException ex) {
+            ex.printStackTrace();
         }
-    }
+}
 
     private void watchServers2() {
         try {
-            List<String> msg = zk.getChildren("/clientQueue", watchedEvent -> {
-                if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
-                    System.out.println("NODE CREATED IN CLIENT QUEUE");
+            zk.exists("/clientQueue/msg", watchedEvent -> {
+                if (watchedEvent.getType() == Watcher.Event.EventType.NodeCreated) {
                     watchServers2();
                 }
             });
 
-            List<String> servers = new ArrayList<>();
 
-            for (String serverNodeName : msg) {
-                byte[] data = zk.getData("/clientQueue" + "/" + serverNodeName, null, null);
-                //System.out.println("watchServers2 : " + new String(data, "UTF-8"));
-                zk.delete(
-                        "/clientQueue" + "/" + serverNodeName,
-                        zk.exists("/clientQueue" + "/" + serverNodeName, false).getVersion());
-                //System.out.println("watchServers2: deleted msg from cQ" + new String(data, "UTF-8"));
-                zk.create("/serverQueue",
-                        ("answer to " + new String(data, "UTF-8")).getBytes(),
-                        ACLS, CreateMode.PERSISTENT);
-            }
+            byte[] data = zk.getData("/clientQueue/msg", null, null);
+            zk.delete("/clientQueue/msg", zk.exists("/clientQueue/msg", false).getVersion());
+            zk.create("/serverQueue/msg", "answer to:".getBytes().)
 
-        } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {
+        } catch (KeeperException | InterruptedException e) {
             e.printStackTrace();
         }
     }
