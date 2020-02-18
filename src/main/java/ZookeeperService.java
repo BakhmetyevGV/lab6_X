@@ -4,6 +4,7 @@ import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.ACL;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,31 +22,57 @@ public class ZookeeperService {
         this.zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, null);
         this.mode = mode;
 
-        watchServers(mode);
-    }
-
-    public void watchServers(int mode) throws KeeperException, InterruptedException {
-        if (mode == CLIENT_MODE) {
-            try {
-                zk.exists("/serverQueue", watchedEvent -> {
-                    if (watchedEvent.getType() == Watcher.Event.EventType.) {
-                        try {
-                            watchServers(mode);
-                        } catch (KeeperException | InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-
-
-            } catch (KeeperException | InterruptedException e) {
-                e.printStackTrace();
-            }
-
+        if(mode == CLIENT_MODE){
+            watchServers1();
+        } else {
+            watchServers2();
         }
 
     }
 
+    private void watchServers1() {
+        try {
+            List<String> msg = zk.getChildren("/serverQueue", watchedEvent -> {
+                if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
+                    watchServers1();
+                }
+            });
+
+            for (String serverNodeName : msg) {
+                byte[] data = zk.getData("/serverQueue" + "/" + serverNodeName, null, null);
+                System.out.println(new String(data, "UTF-8"));
+                zk.delete(
+                        "/serverQueue" + "/" + serverNodeName,
+                        zk.exists("/serverQueue" + "/" + serverNodeName, false).getVersion());
+            }
+
+        } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void watchServers2() {
+        try {
+            List<String> msg = zk.getChildren("/serverQueue", watchedEvent -> {
+                if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
+                    watchServers2();
+                }
+            });
+
+            List<String> servers = new ArrayList<>();
+
+            for (String serverNodeName : msg) {
+                byte[] data = zk.getData("/serverQueue" + "/" + serverNodeName, null, null);
+                System.out.println(new String(data, "UTF-8"));
+                zk.delete(
+                        "/serverQueue" + "/" + serverNodeName,
+                        zk.exists("/serverQueue" + "/" + serverNodeName, false).getVersion());
+            }
+
+        } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
 
     public void createClientNode() throws KeeperException, InterruptedException {
         String znodePath = "/clientQueue";

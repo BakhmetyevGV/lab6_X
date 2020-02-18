@@ -23,12 +23,13 @@ public class Server extends AllDirectives {
     private Watcher watcher;
     private String nodePath;
     private String dataNode;
+    private int mode;
 
     public Server(int port) throws IOException, KeeperException, InterruptedException {
         this.http = http;
         this.port = port;
         //this.httpActor = httpActor;
-        this.zookeeperService = new ZookeeperService();
+
         this.zk = this.zookeeperService.zk;
 
         switch (port) {
@@ -36,14 +37,17 @@ public class Server extends AllDirectives {
                 nodePath = "/serverQueue";
                 dataNode = "/serverQueue/msg";
 
+                mode = 0;
                 break;
             case 8095:
                 nodePath = "/clientQueue";
                 dataNode = "/clientQueue/msg";
 
+                mode = 1;
                 break;
         }
 
+        this.zookeeperService = new ZookeeperService(mode);
     }
 
     private void initWatcher(int mode) {
