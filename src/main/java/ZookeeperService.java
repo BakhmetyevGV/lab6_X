@@ -13,9 +13,16 @@ public class ZookeeperService {
 
     public ZooKeeper zk;
     //private ActorRef httpActor;
+    private Watcher connectionWatcher;
 
     public ZookeeperService() throws IOException {
-        this.zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, null);
+        connectionWatcher = we -> {
+            if (we.getState() == Watcher.Event.KeeperState.SyncConnected) {
+                System.out.println("Connected to Zookeeper in " + Thread.currentThread().getName());
+            }
+        };
+
+        this.zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
         //this.httpActor = httpActor;
     }
 
@@ -23,6 +30,8 @@ public class ZookeeperService {
         String znodePath = "/clientQueue";
         if (zk.exists(znodePath, false) == null) {
             zk.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
+
+            System.out.println("Client Node created");
         }
         //zk.create("/clientNode","data".getBytes(), ACLS, CreateMode.PERSISTENT);
     }
@@ -31,14 +40,18 @@ public class ZookeeperService {
         String znodePath = "/serverQueue";
         if (zk.exists(znodePath, false) == null) {
             zk.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
+
+            System.out.println("Server Node created");
         }
     }
 
     public void msgFromClient() throws KeeperException, InterruptedException {
         zk.create("/clientQueue/msg", "testing..".getBytes(),ACLS,CreateMode.PERSISTENT);
+        System.out.println("Sending message from client");
     }
 
     public void msgFromServer() throws KeeperException, InterruptedException {
         zk.create("/serverQueue/msg", "test completed OK".getBytes(),ACLS,CreateMode.PERSISTENT);
+        System.out.println("Sending message from server");
     }
 }
