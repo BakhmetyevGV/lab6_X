@@ -41,6 +41,10 @@ public class Launcher {
             }
         };
 
+        Watcher clientWatcher = watchedEvent -> {
+            
+        };
+
         ZooKeeper zooKeeper = null;
         synchronized (lock) {
             zooKeeper = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
