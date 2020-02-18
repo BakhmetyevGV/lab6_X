@@ -44,7 +44,7 @@ public class Launcher {
 
         String znodePath = "/clientQueue";
         if (zooKeeper.exists(znodePath, false) == null) {
-            zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT_SEQUENTIAL);
+            zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 
 
