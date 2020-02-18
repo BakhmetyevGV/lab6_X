@@ -11,7 +11,11 @@ public class test {
         ZooKeeper zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, null);
 
         for(String node : zk.getChildren("/clientQueue", null)){
-            System.out.println(node);
+            System.out.println("cQ: " + node);
+        }
+
+        for(String node : zk.getChildren("/serverQueue", null)){
+            System.out.println("sQ: " + node);
         }
     }
 
