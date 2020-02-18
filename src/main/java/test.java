@@ -10,7 +10,7 @@ public class test {
     public static void main(String[] args) throws IOException, KeeperException, InterruptedException {
         ZooKeeper zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, null);
 
-        for(String node : zk.getChildren("/", null)){
+        for(String node : zk.getChildren("/serverQueue", null)){
             System.out.println(node);
         }
     }
