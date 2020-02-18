@@ -86,11 +86,11 @@ public class Server extends AllDirectives {
         zk.exists(nodePath, watcher);
     }
 
-    private void msgFromClient() throws KeeperException, InterruptedException {
+    public void msgFromClient() throws KeeperException, InterruptedException {
         zookeeperService.msgFromClient();
     }
 
-    private void msgFromServer() throws KeeperException, InterruptedException {
+    public void msgFromServer() throws KeeperException, InterruptedException {
         zookeeperService.msgFromServer();
     }
 

@@ -67,7 +67,11 @@ public class Launcher {
 //        }
 
 
-        System.in.read();
+        if(serverPort == 8095) {
+            System.in.read();
+        } else{
+            server
+        }
     }
 }
 
