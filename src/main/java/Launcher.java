@@ -46,6 +46,10 @@ public class Launcher {
         if (zooKeeper.exists(znodePath, false) == null) {
             zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         } else{
+            for(String node : zooKeeper.getChildren(znodePath, false)){
+                zooKeeper.delete(node, zooKeeper.exists(znodePath + node, false).getVersion());
+            }
+
             zooKeeper.delete(znodePath, zooKeeper.exists(znodePath, true).getVersion());
             zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
