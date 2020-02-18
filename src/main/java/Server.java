@@ -64,7 +64,7 @@ public class Server extends AllDirectives {
                     if (mode == CLIENT_MODE) {
                         System.out.println(new String(data, "UTF-8"));
                     } else if (mode == SERVER_MODE) {
-                        handleHttp(new String(data, "UTF-8"));
+//                        handleHttp(new String(data, "UTF-8"));
                     }
 
 
@@ -80,19 +80,18 @@ public class Server extends AllDirectives {
         };
     }
 
-    public Route createRoute() {
-        return get(() ->
-                parameter("url", url -> {
-                    return completeWithFuture(http.singleRequest(HttpRequest.create(url)));
-                }));
-    }
+
 
     private void watchNodes() throws KeeperException, InterruptedException {
         zk.exists(nodePath, watcher);
     }
 
-    private void handleHttp(String data) {
+    private void msgFromClient() throws KeeperException, InterruptedException {
+        zookeeperService.msgFromClient();
+    }
 
+    private void msgFromServer() throws KeeperException, InterruptedException {
+        zookeeperService.msgFromServer();
     }
 
 }

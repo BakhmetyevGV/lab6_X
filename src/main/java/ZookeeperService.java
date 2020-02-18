@@ -33,4 +33,12 @@ public class ZookeeperService {
             zk.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
     }
+
+    public void msgFromClient() throws KeeperException, InterruptedException {
+        zk.create("/clientQueue/msg", "testing..".getBytes(),ACLS,CreateMode.PERSISTENT);
+    }
+
+    public void msgFromServer() throws KeeperException, InterruptedException {
+        zk.create("/serverQueue/msg", "test completed OK".getBytes(),ACLS,CreateMode.PERSISTENT);
+    }
 }
