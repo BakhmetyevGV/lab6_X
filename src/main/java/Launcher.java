@@ -61,13 +61,16 @@ public class Launcher {
 
         zooKeeper.exists(znodePath, clientWatcher);
 
-        String znodePath2 = "/clientQueue/msg";
-        if (zooKeeper.exists(znodePath2, false) == null) {
-            zooKeeper.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
-        } else {
-            zooKeeper.delete(znodePath2, 0);
-            zooKeeper.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
+        synchronized (lock){
+            String znodePath2 = "/clientQueue/msg";
+            if (zooKeeper.exists(znodePath2, false) == null) {
+                zooKeeper.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
+            } else {
+                zooKeeper.delete(znodePath2, 0);
+                zooKeeper.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
+            }
         }
+
 
         //byte[] data = zooKeeper.getData(znodePath2, null, null);
         //System.out.println("Result: " + new String(data, "UTF-8"));
