@@ -109,7 +109,14 @@ public class Launcher {
             System.in.read();
         } else{
             server.msgFromClient();
-            System.in.read();
+            try {
+                synchronized (this) {
+                    while (true) {
+                        wait();
+                    }
+                }
+            } catch (InterruptedException e) {
+            }
         }
     }
 }
