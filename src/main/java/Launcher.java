@@ -42,7 +42,7 @@ public class Launcher {
         ZooKeeper zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
 
         String znodePath = "/clientQueue";
-        zk.delete(znodePath + "/msgmsg0000000001",
+        zk.delete(znodePath + "/msg0000000001",
                 zk.exists(znodePath + "/msg0000000001", false).getVersion());
 
         for(String node : zk.getChildren(znodePath, false)){
