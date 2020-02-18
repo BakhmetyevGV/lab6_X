@@ -41,13 +41,6 @@ public class Launcher {
             }
         };
 
-
-        Object lock2 = new Object();
-        Watcher clientWatcher = watchedEvent -> {
-            System.out.println("ssssssssssssssssssssssssss");
-        };
-
-
         ZooKeeper zooKeeper = null;
         synchronized (lock) {
             zooKeeper = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
@@ -60,10 +53,21 @@ public class Launcher {
         }
 
 
-        zooKeeper.exists(znodePath, clientWatcher);
-
+        Object lock2 = new Object();
+        Watcher clientWatcher = we -> {
+            if (true) {
+                System.out.println("Connected to Zookeeper in ALSLSLSLSLSLSl " + Thread.currentThread().getName());
+                synchronized (lock) {
+                    lock.notifyAll();
+                }
+            }
+        };
 
         String znodePath2 = "/clientQueue/msg";
+        synchronized (lock2) {
+            zooKeeper.exists(znodePath2, clientWatcher);
+            lock2.wait();
+        }
 
         if (zooKeeper.exists(znodePath2, false) == null) {
             zooKeeper.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
