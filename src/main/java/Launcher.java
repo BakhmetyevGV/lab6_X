@@ -57,9 +57,8 @@ public class Launcher {
             zk.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 
-
         zk.exists(znodePath, clientWatcher);
-
+        
         String znodePath2 = "/clientQueue/msg";
         if (zk.exists(znodePath2, false) == null) {
             zk.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
