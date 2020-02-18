@@ -58,7 +58,7 @@ public class Launcher {
         }
 
         zk.exists(znodePath, clientWatcher);
-        
+
         String znodePath2 = "/clientQueue/msg";
         if (zk.exists(znodePath2, false) == null) {
             zk.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
@@ -66,8 +66,7 @@ public class Launcher {
             zk.delete(znodePath2, zk.exists(znodePath2, true).getVersion());
             zk.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
-//
-//
+
 //        byte[] data = zk.getData(znodePath, null, null);
 //        System.out.println("Result: " + new String(data, "UTF-8"));
 //
