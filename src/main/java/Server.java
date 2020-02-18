@@ -4,6 +4,8 @@ import akka.http.javadsl.server.AllDirectives;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
+import java.io.IOException;
+
 public class Server extends AllDirectives {
     private Http http;
     private ActorRef httpActor;
@@ -12,12 +14,12 @@ public class Server extends AllDirectives {
     private ZookeeperService zookeeperService;
     private ZooKeeper zk;
 
-    public Server(final Http http, int port, ActorRef httpActor) {
+    public Server(final Http http, int port, ActorRef httpActor) throws IOException {
         this.http = http;
         this.port = port;
         this.httpActor = httpActor;
         this.zookeeperService = new ZookeeperService(httpActor);
-
+        this.zk = this.zookeeperService.zk;
 
         switch (port){
             case 8094:
