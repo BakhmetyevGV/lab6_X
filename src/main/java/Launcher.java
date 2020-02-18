@@ -39,10 +39,13 @@ public class Launcher {
         };
 
         Watcher clientWatcher = we -> {
-            if(we.getType() == Watcher.Event.EventType.NodeCreated)
-                System.out.println("Node Created in clientQueue");
-            else
-                System.out.println("Something else");
+//            if(we.getType() == Watcher.Event.EventType.NodeCreated)
+//                System.out.println("Node Created in clientQueue");
+//            else
+//                System.out.println("Something else");
+
+            System.out.println("type: " + we.getType());
+            System.out.println("state: " +we.getState());
         };
 
         ZooKeeper zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
