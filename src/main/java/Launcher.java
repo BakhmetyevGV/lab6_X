@@ -36,8 +36,8 @@ public class Launcher {
         };
 
         ZookeeperService zookeeperService = new ZookeeperService();
-        zookeeperService.createClientNode();
-        zookeeperService.createServerNode();
+        //zookeeperService.createClientNode();
+        //zookeeperService.createServerNode();
 
 
         //Server server = new Server(serverPort);
@@ -46,6 +46,9 @@ public class Launcher {
         zk.delete("/clientQueue/msg",
                 zk.exists("/clientQueue/msg", false).getVersion());
 
+        zk.delete("/clientQueue", zk.exists("/clientQueue", false).getVersion());
+        zk.delete("/serverQueue", zk.exists("/serverQueue", false).getVersion());
+        
         //zk.exists(znodePath, clientWatcher);
 
 //        String znodePath2 = "/clientQueue/msg";
