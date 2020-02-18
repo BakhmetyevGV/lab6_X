@@ -81,8 +81,9 @@ public class Launcher {
         if(serverPort == 8094){
             Scanner sc = new Scanner(System.in);
 
-            zk.create("/clientQueue/msg", "testing".getBytes(), ACLS, CreateMode.PERSISTENT);
+            //zk.create("/clientQueue/msg", "testing".getBytes(), ACLS, CreateMode.PERSISTENT);
 
+            zookeeperService.msgFromClient();
         }
 
         //zk.create("/clientQueue/msg", "msg from client queue".getBytes(), ACLS, CreateMode.PERSISTENT);

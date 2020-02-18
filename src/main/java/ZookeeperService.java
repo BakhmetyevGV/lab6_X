@@ -62,10 +62,11 @@ public class ZookeeperService {
             if(zk.exists("/clientQueue/msg",false) != null) {
                 byte[] data = zk.getData("/clientQueue/msg", null, null);
                 zk.delete("/clientQueue/msg", zk.exists("/clientQueue/msg", false).getVersion());
-                zk.create("/serverQueue/msg", ("answer to:" + new String(data, "UTF-8")).getBytes(),
-                        ACLS, CreateMode.PERSISTENT);
+                msgFromServer();
+                //                zk.create("/serverQueue/msg", ("answer to:" + new String(data, "UTF-8")).getBytes(),
+//                        ACLS, CreateMode.PERSISTENT);
             }
-        } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {
+        } catch (KeeperException | InterruptedException  e) {
             e.printStackTrace();
         }
     }
