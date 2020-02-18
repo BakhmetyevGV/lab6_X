@@ -75,8 +75,8 @@ public class Launcher {
 
         ZooKeeper zk = zookeeperService.zk;
         zk.create("/clientQueue/msg", "data".getBytes(), ACLS, CreateMode.PERSISTENT);
-        zk.create("/clientQueue/msg", "data".getBytes(), ACLS, CreateMode.PERSISTENT);
-        zk.create("/clientQueue/msg", "data".getBytes(), ACLS, CreateMode.PERSISTENT);
+//        zk.create("/clientQueue/msg", "data".getBytes(), ACLS, CreateMode.PERSISTENT);
+//        zk.create("/clientQueue/msg", "data".getBytes(), ACLS, CreateMode.PERSISTENT);
 
         //Server server = new Server(serverPort);
 
