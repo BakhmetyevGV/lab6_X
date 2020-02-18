@@ -36,20 +36,12 @@ public class Server extends AllDirectives {
                 nodePath = "/serverQueue";
                 dataNode = "/serverQueue/msg";
 
-                initWatcher(CLIENT_MODE);
-
-                /*...*/
                 break;
             case 8095:
                 nodePath = "/clientQueue";
                 dataNode = "/clientQueue/msg";
 
-                initWatcher(SERVER_MODE);
-                /*...*/
                 break;
-            default:
-                System.out.println("Fuck this shit im out");
-                System.exit(-1);
         }
 
     }
@@ -67,7 +59,6 @@ public class Server extends AllDirectives {
                         zookeeperService.msgFromServer();
                     }
 
-
                 } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {
                     e.printStackTrace();
                 }
@@ -79,8 +70,6 @@ public class Server extends AllDirectives {
             }
         };
     }
-
-
 
     private void watchNodes() throws KeeperException, InterruptedException {
         zk.exists(nodePath, watcher);
