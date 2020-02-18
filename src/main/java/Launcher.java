@@ -76,8 +76,16 @@ public class Launcher {
         zookeeperService.createServerNode();
 
         ZooKeeper zk = zookeeperService.zk;
+
+        if(serverPort == 8094){
+            zk.create("/clientQueue/msg", "msg from client 1".getBytes(), ACLS, CreateMode.PERSISTENT);
+            zk.create("/clientQueue/msg", "msg from client 2".getBytes(), ACLS, CreateMode.PERSISTENT);
+            zk.create("/clientQueue/msg", "msg from client 3".getBytes(), ACLS, CreateMode.PERSISTENT);
+            
+        }
+
         //zk.create("/clientQueue/msg", "msg from client queue".getBytes(), ACLS, CreateMode.PERSISTENT);
-        zk.create("/serverQueue/msg", "msg from server queue".getBytes(), ACLS, CreateMode.PERSISTENT);
+        //zk.create("/serverQueue/msg", "msg from server queue".getBytes(), ACLS, CreateMode.PERSISTENT);
 
 
         //Server server = new Server(serverPort);
