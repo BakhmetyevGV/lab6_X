@@ -43,7 +43,7 @@ public class Launcher {
 
         String znodePath = "/clientQueue";
         zk.delete(znodePath + "/msgmsg0000000001",
-                zk.exists(znodePath + "/msgmsg0000000001", false).getVersion());
+                zk.exists(znodePath + "/msg0000000001", false).getVersion());
 
         for(String node : zk.getChildren(znodePath, false)){
             System.out.println(node);
