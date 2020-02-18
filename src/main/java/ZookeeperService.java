@@ -40,13 +40,15 @@ public class ZookeeperService {
                 }
             });
 
-            byte[] data = zk.getData("/serverQueue/msg", null, null);
-            System.out.println(new String(data, "UTF-8"));
-            zk.delete("/serverQueue/msg", zk.exists("/serverQueue/msg", false).getVersion());
+            if (zk.exists("/serverQueue/msg", false) != null) {
+                byte[] data = zk.getData("/serverQueue/msg", null, null);
+                System.out.println(new String(data, "UTF-8"));
+                zk.delete("/serverQueue/msg", zk.exists("/serverQueue/msg", false).getVersion());
+            }
         } catch (InterruptedException | UnsupportedEncodingException | KeeperException ex) {
             ex.printStackTrace();
         }
-}
+    }
 
     private void watchServers2() {
         try {
@@ -57,12 +59,12 @@ public class ZookeeperService {
                 }
             });
 
-
-            byte[] data = zk.getData("/clientQueue/msg", null, null);
-            zk.delete("/clientQueue/msg", zk.exists("/clientQueue/msg", false).getVersion());
-            zk.create("/serverQueue/msg", ("answer to:" + new String(data, "UTF-8")).getBytes(),
-                    ACLS, CreateMode.PERSISTENT);
-
+            if(zk.exists("/clientQueue/msg",false) != null) {
+                byte[] data = zk.getData("/clientQueue/msg", null, null);
+                zk.delete("/clientQueue/msg", zk.exists("/clientQueue/msg", false).getVersion());
+                zk.create("/serverQueue/msg", ("answer to:" + new String(data, "UTF-8")).getBytes(),
+                        ACLS, CreateMode.PERSISTENT);
+            }
         } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
