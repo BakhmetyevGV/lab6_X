@@ -6,8 +6,8 @@ import org.apache.zookeeper.data.ACL;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
 import java.util.List;
+
 
 public class ZookeeperService {
     private static final String ZOOKEEPER_SERVER = "127.0.0.1:2181";
@@ -58,7 +58,7 @@ public class ZookeeperService {
 
             byte[] data = zk.getData("/clientQueue/msg", null, null);
             zk.delete("/clientQueue/msg", zk.exists("/clientQueue/msg", false).getVersion());
-            zk.create("/serverQueue/msg", ArrayUtils"answer to:".getBytes())
+            zk.create("/serverQueue/msg", ArrayUtils.addAll("answer to:".getBytes(), data), ACLS, CreateMode.PERSISTENT);
 
         } catch (KeeperException | InterruptedException e) {
             e.printStackTrace();
