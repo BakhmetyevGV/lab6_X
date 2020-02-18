@@ -49,7 +49,7 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
-  <component name="RunManager" selected="Application.test">
+  <component name="RunManager" selected="Application.client">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Launcher" />
       <module name="lab6" />
@@ -58,15 +58,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="server3" type="Application" factoryName="Application">
+    <configuration name="client" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Launcher" />
       <module name="lab6" />
-      <option name="PROGRAM_PARAMETERS" value="8095" />
+      <option name="PROGRAM_PARAMETERS" value="8094" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="test" type="Application" factoryName="Application">
+    <configuration name="server" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Launcher" />
       <module name="lab6" />
       <option name="PROGRAM_PARAMETERS" value="8095" />
@@ -83,8 +83,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.server3" />
-      <item itemvalue="Application.test" />
+      <item itemvalue="Application.server" />
+      <item itemvalue="Application.client" />
     </list>
     <recent_temporary>
       <list>
@@ -122,7 +122,7 @@
       <workItem from="1581416138673" duration="230000" />
       <workItem from="1581416385983" duration="1838000" />
       <workItem from="1581673540407" duration="1562000" />
-      <workItem from="1581951650228" duration="25347000" />
+      <workItem from="1581951650228" duration="25385000" />
     </task>
     <servers />
   </component>
@@ -134,10 +134,10 @@
       <screen x="53" y="24" width="1313" height="744" />
     </state>
     <state x="308" y="44" key="#Project_Structure/53.24.1313.744@53.24.1313.744" timestamp="1577525070234" />
-    <state x="173" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582028119760">
+    <state x="173" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582053790289">
       <screen x="53" y="24" width="1313" height="744" />
     </state>
-    <state x="173" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog/53.24.1313.744@53.24.1313.744" timestamp="1582028119760" />
+    <state x="173" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog/53.24.1313.744@53.24.1313.744" timestamp="1582053790289" />
     <state x="521" y="95" key="#com.intellij.ide.util.MemberChooser" timestamp="1582046176158">
       <screen x="53" y="24" width="1313" height="744" />
     </state>
