@@ -69,6 +69,7 @@ public class ZookeeperService {
                 zk.delete(
                         "/clientQueue" + "/" + serverNodeName,
                         zk.exists("/clientQueue" + "/" + serverNodeName, false).getVersion());
+                System.out.println("watchServers2: deleted msg from cQ" + new String(data, "UTF-8"));
             }
 
         } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {

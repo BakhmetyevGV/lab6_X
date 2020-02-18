@@ -81,7 +81,7 @@ public class Launcher {
             zk.create("/clientQueue/msg", "msg from client 1".getBytes(), ACLS, CreateMode.PERSISTENT);
             zk.create("/clientQueue/msg", "msg from client 2".getBytes(), ACLS, CreateMode.PERSISTENT);
             zk.create("/clientQueue/msg", "msg from client 3".getBytes(), ACLS, CreateMode.PERSISTENT);
-            
+
         }
 
         //zk.create("/clientQueue/msg", "msg from client queue".getBytes(), ACLS, CreateMode.PERSISTENT);
