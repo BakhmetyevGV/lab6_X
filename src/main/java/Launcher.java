@@ -1,3 +1,7 @@
+import akka.actor.Actor;
+import akka.actor.ActorRef;
+import akka.actor.ActorSystem;
+import akka.actor.Props;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.server.AllDirectives;
 import org.apache.zookeeper.*;
@@ -20,9 +24,12 @@ public class Launcher {
     private static final List<ACL> ACLS = ZooDefs.Ids.OPEN_ACL_UNSAFE;
 
     public static void main(String[] args) throws InterruptedException, IOException, KeeperException {
-        //ActorSystem sys = ActorSystem.create("noname");
-        //ActorRef actor = sys.actorOf(Props.create(Actor.class));
-        //Http http = Http.get(sys);
+        ActorSystem sys = ActorSystem.create("noname");
+        ActorRef actor = sys.actorOf(Props.create(Actor.class));
+        Http http = Http.get(sys);
+        int serverPort = Integer.parseInt(args[0]);
+
+        Server server = new Server(http, serverPort);
 
         Object lock = new Object();
         Watcher connectionWatcher = we -> {
