@@ -16,7 +16,7 @@ public class ZookeeperService {
 
 
     public ZookeeperService() throws IOException {
-        this.zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, );
+        this.zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, this);
         //this.httpActor = httpActor;
     }
 
