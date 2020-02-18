@@ -39,7 +39,7 @@ public class Launcher {
         };
 
         Watcher clientWatcher = we -> {
-            System.out.println("Connected to Zookeeper in ALSLSLSLSLSLSl " + Thread.currentThread().getName());
+            System.out.println("change in clientQueue");
         };
 
         ZooKeeper zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
@@ -58,15 +58,15 @@ public class Launcher {
         }
 
 
-        zk.
+        zk.exists(znodePath, clientWatcher);
 
-//        String znodePath2 = "/clientQueue/msg";
-//        if (zk.exists(znodePath2, false) == null) {
-//            zk.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
-//        } else {
-//            zk.delete(znodePath2, zk.exists(znodePath2, true).getVersion());
-//            zk.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
-//        }
+        String znodePath2 = "/clientQueue/msg";
+        if (zk.exists(znodePath2, false) == null) {
+            zk.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
+        } else {
+            zk.delete(znodePath2, zk.exists(znodePath2, true).getVersion());
+            zk.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
+        }
 //
 //
 //        byte[] data = zk.getData(znodePath, null, null);
@@ -80,7 +80,7 @@ public class Launcher {
 //        }
 
 
-        //System.in.read();
+        System.in.read();
     }
 }
 
