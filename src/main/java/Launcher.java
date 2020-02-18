@@ -36,6 +36,45 @@ public class Launcher {
         };
 
         ZookeeperService zookeeperService = new ZookeeperService();
+
+        if(serverPort == 0){
+            ZooKeeper zk = zookeeperService.zk;
+            System.out.println("Starting cleanup");
+            for(String node : zk.getChildren("/clientQueue", false)){
+                System.out.println("client msg" + node);
+            }
+
+            for(String node : zk.getChildren("/serverQueue", false)){
+                System.out.println("server msg" + node);
+            }
+
+            if(zk.exists("/clientQueue/msg", false) != null) {
+                zk.delete("/clientQueue/msg", zk.exists("/clientQueue/msg", false).getVersion());
+            }
+
+            if(zk.exists("/serverQueue/msg", false) != null) {
+                zk.delete("/serverQueue/msg", zk.exists("/serverQueue/msg", false).getVersion());
+            }
+
+            if(zk.exists("/clientQueue", false) != null){
+                zk.delete("/clientQueue", zk.exists("/clientQueue", false).getVersion());
+            }
+
+            if(zk.exists("/serverQueue", false) != null){
+                zk.delete("/serverQueue", zk.exists("/serverQueue", false).getVersion());
+            }
+
+            for(String node : zk.getChildren("/clientQueue", false)){
+                System.out.println("client msg" + node);
+            }
+
+            for(String node : zk.getChildren("/serverQueue", false)){
+                System.out.println("server msg" + node);
+            }
+            System.out.println("Finished cleanup");
+            System.exit(0);
+        }
+
         zookeeperService.createClientNode();
         zookeeperService.createServerNode();
 
@@ -76,6 +115,7 @@ public class Launcher {
             System.in.read();
         } else{
             server.msgFromClient();
+            System.in.read();
         }
     }
 }
