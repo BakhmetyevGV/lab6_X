@@ -39,37 +39,41 @@ public class Launcher {
 
         };
 
-        ZooKeeper zooKeeper = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
+        ZooKeeper zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
 
         String znodePath = "/clientQueue";
-        if (zooKeeper.exists(znodePath, false) == null) {
-            zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
-        } else{
-            for(String node : zooKeeper.getChildren(znodePath, false)){
-                zooKeeper.delete(node, zooKeeper.exists(znodePath + node, false).getVersion());
-            }
-            zooKeeper.delete(znodePath, zooKeeper.exists(znodePath, true).getVersion());
-            zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
-        }
+        zk.delete(znodePath + "/msg", zk.exists(znodePath + "/msg",false).getVersion());
 
-        Watcher clientWatcher = we -> {
-            System.out.println("Connected to Zookeeper in ALSLSLSLSLSLSl " + Thread.currentThread().getName());
-        };
+        zk.getChildren(znodePath, false);
 
-        String znodePath2 = "/clientQueue/msg";
-        if (zooKeeper.exists(znodePath2, false) == null) {
-            zooKeeper.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
-        } else {
-            zooKeeper.delete(znodePath2, zooKeeper.exists(znodePath2, true).getVersion());
-            zooKeeper.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
-        }
+        //        if (zooKeeper.exists(znodePath, false) == null) {
+//            zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
+//        } else{
+//            for(String node : zooKeeper.getChildren(znodePath, false)){
+//                zooKeeper.delete(node, zooKeeper.exists(znodePath + node, false).getVersion());
+//            }
+//            zooKeeper.delete(znodePath, zooKeeper.exists(znodePath, true).getVersion());
+//            zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
+//        }
 
-
-        byte[] data = zooKeeper.getData(znodePath, null, null);
-        System.out.println("Result: " + new String(data, "UTF-8"));
-
-        byte[] data2 = zooKeeper.getData(znodePath2, null, null);
-        System.out.println("Result2: " + new String(data2, "UTF-8"));
+//        Watcher clientWatcher = we -> {
+//            System.out.println("Connected to Zookeeper in ALSLSLSLSLSLSl " + Thread.currentThread().getName());
+//        };
+//
+//        String znodePath2 = "/clientQueue/msg";
+//        if (zooKeeper.exists(znodePath2, false) == null) {
+//            zooKeeper.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
+//        } else {
+//            zooKeeper.delete(znodePath2, zooKeeper.exists(znodePath2, true).getVersion());
+//            zooKeeper.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
+//        }
+//
+//
+//        byte[] data = zooKeeper.getData(znodePath, null, null);
+//        System.out.println("Result: " + new String(data, "UTF-8"));
+//
+//        byte[] data2 = zooKeeper.getData(znodePath2, null, null);
+//        System.out.println("Result2: " + new String(data2, "UTF-8"));
 
 
 //        for(String node : zooKeeper.getChildren(znodePath, false)){
