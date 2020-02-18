@@ -51,12 +51,12 @@ public class Launcher {
         for(String node : zk.getChildren(znodePath, false)){
             System.out.println(node);
         }
-
-        if (zk.exists(znodePath, false) != null) {
-            zk.delete(znodePath, zk.exists(znodePath, true).getVersion());
-            System.out.println("clientQueue Deleted");
-        }
-        zk.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
+//
+//        if (zk.exists(znodePath, false) != null) {
+//            zk.delete(znodePath, zk.exists(znodePath, true).getVersion());
+//            System.out.println("clientQueue Deleted");
+//        }
+//        zk.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
 
         String znodePath2 = "/clientQueue/msg";
         if (zk.exists(znodePath2, false) == null) {
