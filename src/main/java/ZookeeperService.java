@@ -36,6 +36,7 @@ public class ZookeeperService {
         try {
             zk.exists("/serverQueue/msg", watchedEvent -> {
                 if (watchedEvent.getType() == Watcher.Event.EventType.NodeCreated) {
+                    System.out.println("watch1 triggered");
                     watchServers1();
                 }
             });
@@ -52,6 +53,7 @@ public class ZookeeperService {
         try {
             zk.exists("/clientQueue/msg", watchedEvent -> {
                 if (watchedEvent.getType() == Watcher.Event.EventType.NodeCreated) {
+                    System.out.println("watch2 triggered");
                     watchServers2();
                 }
             });
@@ -59,9 +61,10 @@ public class ZookeeperService {
 
             byte[] data = zk.getData("/clientQueue/msg", null, null);
             zk.delete("/clientQueue/msg", zk.exists("/clientQueue/msg", false).getVersion());
-            zk.create("/serverQueue/msg", ArrayUtils.addAll("answer to:".getBytes(), data), ACLS, CreateMode.PERSISTENT);
+            zk.create("/serverQueue/msg", ("answer to:" + new String(data, "UTF-8")).getBytes(),
+                    ACLS, CreateMode.PERSISTENT);
 
-        } catch (KeeperException | InterruptedException e) {
+        } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
     }
