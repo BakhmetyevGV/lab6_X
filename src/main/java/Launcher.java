@@ -44,7 +44,9 @@ public class Launcher {
         String znodePath = "/clientQueue";
         zk.delete(znodePath + "/msg", zk.exists(znodePath + "/msg",false).getVersion());
 
-        zk.getChildren(znodePath, false);
+        for(String node : zk.getChildren(znodePath, false)){
+            System.out.println(node);
+        }
 
         //        if (zooKeeper.exists(znodePath, false) == null) {
 //            zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
