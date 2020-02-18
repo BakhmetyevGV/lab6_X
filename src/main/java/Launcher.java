@@ -81,7 +81,7 @@ public class Launcher {
         if(serverPort == 8094){
             Scanner sc = new Scanner(System.in);
 
-            zk.create("/clientQueue/msg", "msg1".getBytes(), ACLS, CreateMode.PERSISTENT);
+            zk.create("/clientQueue/msg", "testing".getBytes(), ACLS, CreateMode.PERSISTENT);
 
         }
 
