@@ -104,20 +104,21 @@ public class Launcher {
 //            System.out.println(node);
 //        }
 
-
-        if(serverPort == 8095) {
-            System.in.read();
-        } else{
-            server.msgFromClient();
-            try {
-                synchronized (this) {
-                    while (true) {
-                        wait();
-                    }
-                }
-            } catch (InterruptedException e) {
-            }
+        try {
+            new Launcher().run();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+
+//        if(serverPort == 8095) {
+//            System.in.read();
+//        } else{
+//            server.msgFromClient();
+//            System.in.read();
+//        }
+        
+
     }
 }
 
