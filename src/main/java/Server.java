@@ -1,16 +1,23 @@
+import akka.actor.ActorRef;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.server.AllDirectives;
+import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
 public class Server extends AllDirectives {
     private Http http;
+    private ActorRef httpActor;
+
     private int port;
     private ZookeeperService zookeeperService;
     private ZooKeeper zk;
 
-    public Server(final Http http, int port) {
+    public Server(final Http http, int port, ActorRef httpActor) {
         this.http = http;
         this.port = port;
+        this.httpActor = httpActor;
+        this.zookeeperService = new ZookeeperService(httpActor);
+
 
         switch (port){
             case 8094:
@@ -27,6 +34,14 @@ public class Server extends AllDirectives {
     }
 
     private void poseAsClient(){
+        Watcher serverWatcher = we-> {
+            if(we.getType() == Watcher.Event.EventType.NodeCreated){
 
+            }
+
+
+        }
+
+        zookeeperService.createServerNode(serverWatcher);
     }
 }
