@@ -70,7 +70,7 @@ public class Launcher {
         if(serverPort == 8095) {
             System.in.read();
         } else{
-            server
+            server.msgFromClient();
         }
     }
 }
