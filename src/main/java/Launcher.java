@@ -84,8 +84,8 @@ public class Launcher {
             //zk.create("/clientQueue/msg", "testing".getBytes(), ACLS, CreateMode.PERSISTENT);
 
             zookeeperService.msgFromClient();
-            zookeeperService.msgFromClient();
-            zookeeperService.msgFromClient();
+//            zookeeperService.msgFromClient();
+//            zookeeperService.msgFromClient();
         }
 
         //zk.create("/clientQueue/msg", "msg from client queue".getBytes(), ACLS, CreateMode.PERSISTENT);
