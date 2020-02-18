@@ -13,10 +13,16 @@ public class ZookeeperService {
 
     public ZooKeeper zk;
     //private ActorRef httpActor;
-
+    private Watcher connectionWatcher;
 
     public ZookeeperService() throws IOException {
-        this.zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, this);
+        connectionWatcher = we -> {
+            if (we.getState() == Watcher.Event.KeeperState.SyncConnected) {
+                System.out.println("Connected to Zookeeper in " + Thread.currentThread().getName());
+            }
+        };
+
+        this.zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
         //this.httpActor = httpActor;
     }
 
