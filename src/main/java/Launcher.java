@@ -57,13 +57,13 @@ public class Launcher {
                 zk.delete("/serverQueue/msg", zk.exists("/serverQueue/msg", false).getVersion());
             }
 
-            if(zk.exists("/clientQueue", false) != null){
-                zk.delete("/clientQueue", zk.exists("/clientQueue", false).getVersion());
-            }
-
-            if(zk.exists("/serverQueue", false) != null){
-                zk.delete("/serverQueue", zk.exists("/serverQueue", false).getVersion());
-            }
+//            if(zk.exists("/clientQueue", false) != null){
+//                zk.delete("/clientQueue", zk.exists("/clientQueue", false).getVersion());
+//            }
+//
+//            if(zk.exists("/serverQueue", false) != null){
+//                zk.delete("/serverQueue", zk.exists("/serverQueue", false).getVersion());
+//            }
 
 
             System.out.println("Finished cleanup");
