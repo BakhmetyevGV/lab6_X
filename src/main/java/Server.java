@@ -29,7 +29,7 @@ public class Server extends AllDirectives {
             case 8094:
                 watcher = we ->{
                     if(we.getType() == Watcher.Event.EventType.NodeCreated){
-                        zk.getData("/serverQueue/msg", false);
+                        zk.getData("/serverQueue/msg", true, zk.exists("/serverQueue/msg", true));
                     }
                 };
                 /*...*/
