@@ -22,7 +22,7 @@ public class ZookeeperService {
             }
         };
 
-        this.zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
+        this.zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, null);
         //this.httpActor = httpActor;
     }
 
