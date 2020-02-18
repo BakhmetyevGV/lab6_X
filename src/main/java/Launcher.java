@@ -42,7 +42,9 @@ public class Launcher {
         };
 
         Watcher clientWatcher = watchedEvent -> {
-            
+            if(watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged){
+                System.out.println("ChildNode ADDED");
+            }
         };
 
         ZooKeeper zooKeeper = null;
