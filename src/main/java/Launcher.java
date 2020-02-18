@@ -41,7 +41,6 @@ public class Launcher {
 
         ZooKeeper zooKeeper = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
 
-
         String znodePath = "/clientQueue";
         if (zooKeeper.exists(znodePath, false) == null) {
             zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
@@ -53,18 +52,10 @@ public class Launcher {
             zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 
-
-
         Watcher clientWatcher = we -> {
             System.out.println("Connected to Zookeeper in ALSLSLSLSLSLSl " + Thread.currentThread().getName());
         };
-//
 
-//        synchronized (lock2) {
-//            zooKeeper.exists(znodePath2, clientWatcher);
-//            lock2.wait();
-//        }
-//
         String znodePath2 = "/clientQueue/msg";
         if (zooKeeper.exists(znodePath2, false) == null) {
             zooKeeper.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
@@ -72,7 +63,6 @@ public class Launcher {
             zooKeeper.delete(znodePath2, zooKeeper.exists(znodePath2, true).getVersion());
             zooKeeper.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
-//
 
 
         byte[] data = zooKeeper.getData(znodePath, null, null);
@@ -87,7 +77,6 @@ public class Launcher {
 //        }
 
 
-        //System.out.println(zooKeeper.getChildren(znodePath2, false));
         System.in.read();
     }
 }
