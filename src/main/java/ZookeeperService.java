@@ -65,11 +65,14 @@ public class ZookeeperService {
 
             for (String serverNodeName : msg) {
                 byte[] data = zk.getData("/clientQueue" + "/" + serverNodeName, null, null);
-                System.out.println("watchServers2 : " + new String(data, "UTF-8"));
+                //System.out.println("watchServers2 : " + new String(data, "UTF-8"));
                 zk.delete(
                         "/clientQueue" + "/" + serverNodeName,
                         zk.exists("/clientQueue" + "/" + serverNodeName, false).getVersion());
-                System.out.println("watchServers2: deleted msg from cQ" + new String(data, "UTF-8"));
+                //System.out.println("watchServers2: deleted msg from cQ" + new String(data, "UTF-8"));
+                zk.create("/serverQueue",
+                        ("answer to " + new String(data, "UTF-8")).getBytes(),
+                        ACLS, CreateMode.PERSISTENT);
             }
 
         } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {
