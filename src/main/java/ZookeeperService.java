@@ -1,6 +1,5 @@
 import akka.actor.ActorRef;
 import akka.dispatch.sysmsg.Watch;
-import com.sun.tools.javac.util.ArrayUtils;
 import org.apache.zookeeper.*;
 import org.apache.zookeeper.data.ACL;
 

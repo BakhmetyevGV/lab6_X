@@ -38,7 +38,7 @@ public class Client {
 
         zookeeperService.createClientNode();
         zookeeperService.createServerNode();
-        zookeeperService.watchClient();
+        //zookeeperService.watchClient();
 
         ZooKeeper zk = zookeeperService.zk;
 
