@@ -53,7 +53,7 @@ public class Launcher {
 //        }
 
         String znodePath = "/clientQueue";
-        if (zk.exists(znodePath, clientWatcher) == null) {
+        if (zk.exists(znodePath, false) == null) {
             zk.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 
@@ -63,7 +63,7 @@ public class Launcher {
         if (zk.exists(znodePath2, false) == null) {
             zk.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
         } else {
-            zk.delete(znodePath2, zk.exists(znodePath2, true).getVersion());
+            zk.delete(znodePath2, zk.exists(znodePath2, false).getVersion());
             zk.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 
