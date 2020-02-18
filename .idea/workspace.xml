@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e4349a14-0ee0-4ccc-9ea7-86f68be713b3" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ZookeeperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ZookeeperService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,7 +136,7 @@
       <workItem from="1581416138673" duration="230000" />
       <workItem from="1581416385983" duration="1838000" />
       <workItem from="1581673540407" duration="1562000" />
-      <workItem from="1581951650228" duration="36847000" />
+      <workItem from="1581951650228" duration="37087000" />
     </task>
     <servers />
   </component>
