@@ -46,9 +46,12 @@ public class Launcher {
         Watcher clientWatcher = watchedEvent -> {
             if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
                 System.out.println("ChildNode ADDED");
-                synchronized (lock2) {
-                    lock2.notifyAll();
-                }
+
+            } else {
+                System.out.println("SMTH ELSE");
+            }
+            synchronized (lock2) {
+                lock2.notifyAll();
             }
         };
 
