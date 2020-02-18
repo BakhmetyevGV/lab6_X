@@ -72,8 +72,7 @@ public class Launcher {
 
         byte[] data2 = zk.getData(znodePath2, null, null);
         System.out.println("Result2: " + new String(data2, "UTF-8"));
-
-
+        
         for(String node : zk.getChildren(znodePath, false)){
             System.out.println(node);
         }
