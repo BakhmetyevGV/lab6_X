@@ -24,12 +24,12 @@ public class Launcher {
     private static final List<ACL> ACLS = ZooDefs.Ids.OPEN_ACL_UNSAFE;
 
     public static void main(String[] args) throws InterruptedException, IOException, KeeperException {
-        ActorSystem sys = ActorSystem.create("noname");
-        ActorRef actor = sys.actorOf(Props.create(Actor.class));
-        Http http = Http.get(sys);
-        int serverPort = Integer.parseInt(args[0]);
+        //ActorSystem sys = ActorSystem.create("noname");
+        //ActorRef actor = sys.actorOf(Props.create(Actor.class));
+        //Http http = Http.get(sys);
+        //int serverPort = Integer.parseInt(args[0]);
 
-        Server server = new Server(http, serverPort);
+        //Server server = new Server(http, serverPort);
 
         Object lock = new Object();
         Watcher connectionWatcher = we -> {
@@ -47,7 +47,7 @@ public class Launcher {
             }
         };
 
-        
+
         ZooKeeper zooKeeper = null;
         synchronized (lock) {
             zooKeeper = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
