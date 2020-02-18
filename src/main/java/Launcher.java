@@ -79,14 +79,7 @@ public class Launcher {
 
         Object lock = new Object();
         if(serverPort == 8094){
-            synchronized (lock){
-                zk.create("/clientQueue/msg", "msg from client 1".getBytes(), ACLS, CreateMode.PERSISTENT);
-                lock.wait();
-            }
-            zk.create("/clientQueue/msg", "msg from client 1".getBytes(), ACLS, CreateMode.PERSISTENT);
-            zk.create("/clientQueue/msg", "msg from client 2".getBytes(), ACLS, CreateMode.PERSISTENT);
-            zk.create("/clientQueue/msg", "msg from client 3".getBytes(), ACLS, CreateMode.PERSISTENT);
-
+            
         }
 
         //zk.create("/clientQueue/msg", "msg from client queue".getBytes(), ACLS, CreateMode.PERSISTENT);
