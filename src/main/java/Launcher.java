@@ -38,7 +38,7 @@ public class Launcher {
 
         int mode = (serverPort == 8094) ? 0 : 1;
 
-        ZookeeperService zookeeperService = new ZookeeperService(serverPort);
+        ZookeeperService zookeeperService = new ZookeeperService(mode);
 
         if(serverPort == 0){
             ZooKeeper zk = zookeeperService.zk;
