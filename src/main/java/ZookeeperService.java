@@ -53,7 +53,7 @@ public class ZookeeperService {
 
     private void watchServers2() {
         try {
-            List<String> msg = zk.getChildren("/serverQueue", watchedEvent -> {
+            List<String> msg = zk.getChildren("/clientQueue", watchedEvent -> {
                 if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
                     watchServers2();
                 }
@@ -62,11 +62,11 @@ public class ZookeeperService {
             List<String> servers = new ArrayList<>();
 
             for (String serverNodeName : msg) {
-                byte[] data = zk.getData("/serverQueue" + "/" + serverNodeName, null, null);
+                byte[] data = zk.getData("/clientQueue" + "/" + serverNodeName, null, null);
                 System.out.println(new String(data, "UTF-8"));
                 zk.delete(
-                        "/serverQueue" + "/" + serverNodeName,
-                        zk.exists("/serverQueue" + "/" + serverNodeName, false).getVersion());
+                        "/clientQueue" + "/" + serverNodeName,
+                        zk.exists("/clientQueue" + "/" + serverNodeName, false).getVersion());
             }
 
         } catch (KeeperException | InterruptedException | UnsupportedEncodingException e) {
