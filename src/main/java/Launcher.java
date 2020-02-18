@@ -12,6 +12,7 @@ import java.util.List;
 
 
 public class Launcher {
+    private static final List<ACL> ACLS = ZooDefs.Ids.OPEN_ACL_UNSAFE;
 
     public static void main(String[] args) throws InterruptedException, IOException, KeeperException {
         //ActorSystem sys = ActorSystem.create("noname");
@@ -35,7 +36,7 @@ public class Launcher {
             System.out.println("state: " + we.getState());
         };
 
-        ZookeeperService zookeeperService = new ZookeeperService();
+        ZookeeperService zookeeperService = new ZookeeperService(serverPort);
 
         if(serverPort == 0){
             ZooKeeper zk = zookeeperService.zk;
@@ -72,8 +73,12 @@ public class Launcher {
         zookeeperService.createClientNode();
         zookeeperService.createServerNode();
 
+        ZooKeeper zk = zookeeperService.zk;
+        zk.create("/clientQueue/msg", "data".getBytes(), ACLS, CreateMode.PERSISTENT);
+        zk.create("/clientQueue/msg", "data".getBytes(), ACLS, CreateMode.PERSISTENT);
+        zk.create("/clientQueue/msg", "data".getBytes(), ACLS, CreateMode.PERSISTENT);
 
-        Server server = new Server(serverPort);
+        //Server server = new Server(serverPort);
 
 //        ZooKeeper zk = zookeeperService.zk;
 //        zk.delete("/clientQueue/msg",
