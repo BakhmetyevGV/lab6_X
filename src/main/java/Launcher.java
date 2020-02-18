@@ -45,6 +45,9 @@ public class Launcher {
         String znodePath = "/clientQueue";
         if (zooKeeper.exists(znodePath, false) == null) {
             zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
+        } else{
+            zooKeeper.delete(znodePath, zooKeeper.exists(znodePath, true).getVersion());
+            zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 
 
@@ -63,7 +66,7 @@ public class Launcher {
         if (zooKeeper.exists(znodePath2, false) == null) {
             zooKeeper.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
         } else {
-            zooKeeper.delete(znodePath2, 0);
+            zooKeeper.delete(znodePath2, zooKeeper.exists(znodePath2, true).getVersion());
             zooKeeper.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 //
