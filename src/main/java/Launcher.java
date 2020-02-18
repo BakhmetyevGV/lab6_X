@@ -30,7 +30,7 @@ public class Launcher {
         //int serverPort = Integer.parseInt(args[0]);
 
         //Server server = new Server(http, serverPort);
-        
+
         Watcher connectionWatcher = we -> {
             if (we.getState() == Watcher.Event.KeeperState.SyncConnected) {
                 System.out.println("Connected to Zookeeper in " + Thread.currentThread().getName());
@@ -52,15 +52,11 @@ public class Launcher {
             System.out.println(node);
         }
 
-        if (zk.exists(znodePath, false) == null) {
-            zk.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
-        } else{
-            for(String node : zk.getChildren(znodePath, false)){
-                zk.delete(node, zk.exists(znodePath + node, false).getVersion());
-            }
+        if (zk.exists(znodePath, false) != null) {
             zk.delete(znodePath, zk.exists(znodePath, true).getVersion());
-            zk.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
+            System.out.println("clientQueue Deleted");
         }
+        zk.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
 
         String znodePath2 = "/clientQueue/msg";
         if (zk.exists(znodePath2, false) == null) {
