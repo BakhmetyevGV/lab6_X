@@ -36,6 +36,8 @@ public class Launcher {
             System.out.println("state: " + we.getState());
         };
 
+        int mode = (serverPort == 8094) ? 0 : 1;
+
         ZookeeperService zookeeperService = new ZookeeperService(serverPort);
 
         if(serverPort == 0){
