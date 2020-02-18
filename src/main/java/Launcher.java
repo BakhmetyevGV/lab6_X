@@ -41,11 +41,11 @@ public class Launcher {
             ZooKeeper zk = zookeeperService.zk;
             System.out.println("Starting cleanup");
             for(String node : zk.getChildren("/clientQueue", false)){
-                System.out.println("client msg" + node);
+                System.out.println("client msg " + node);
             }
 
             for(String node : zk.getChildren("/serverQueue", false)){
-                System.out.println("server msg" + node);
+                System.out.println("server msg " + node);
             }
 
             if(zk.exists("/clientQueue/msg", false) != null) {
@@ -64,13 +64,7 @@ public class Launcher {
                 zk.delete("/serverQueue", zk.exists("/serverQueue", false).getVersion());
             }
 
-            for(String node : zk.getChildren("/clientQueue", false)){
-                System.out.println("client msg" + node);
-            }
 
-            for(String node : zk.getChildren("/serverQueue", false)){
-                System.out.println("server msg" + node);
-            }
             System.out.println("Finished cleanup");
             System.exit(0);
         }
