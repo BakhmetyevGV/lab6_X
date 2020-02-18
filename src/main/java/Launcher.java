@@ -44,8 +44,8 @@ public class Launcher {
 //            else
 //                System.out.println("Something else");
 
-            System.out.println("type: " + we.getType());
-            System.out.println("state: " +we.getState());
+            System.out.println("type: "  + we.getType());
+            System.out.println("state: " + we.getState());
         };
 
         ZooKeeper zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
