@@ -44,15 +44,7 @@ public class Launcher {
 
         Object lock2 = new Object();
         Watcher clientWatcher = watchedEvent -> {
-            if (watchedEvent.getType() == Watcher.Event.EventType.NodeChildrenChanged) {
-                System.out.println("ChildNode ADDED");
-
-            } else {
-                System.out.println("SMTH ELSE");
-            }
-            synchronized (lock2) {
-                lock2.notifyAll();
-            }
+            System.out.println("ssssssssssssssssssssssssss");
         };
 
 
@@ -67,10 +59,9 @@ public class Launcher {
             zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 
-        synchronized (lock2) {
-            zooKeeper.exists(znodePath, clientWatcher);
-            lock2.wait();
-        }
+
+        zooKeeper.exists(znodePath, clientWatcher);
+
 
         String znodePath2 = "/clientQueue/msg";
 
