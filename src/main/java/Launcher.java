@@ -59,7 +59,7 @@ public class Launcher {
             zooKeeper.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
 
-        zooKeeper.exists(znodePath, clientWatcher);
+        zooKeeper.exists(znodePath, clientWatcher, null, this);
 
         String znodePath2 = "/clientQueue/msg";
         if (zooKeeper.exists(znodePath2, false) == null) {
