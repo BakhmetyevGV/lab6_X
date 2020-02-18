@@ -1,2 +1,2 @@
-public class httpActor {
+public class HttpActor {
 }

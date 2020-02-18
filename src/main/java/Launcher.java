@@ -25,7 +25,7 @@ public class Launcher {
 
     public static void main(String[] args) throws InterruptedException, IOException, KeeperException {
         ActorSystem sys = ActorSystem.create("noname");
-        ActorRef actor = sys.actorOf(Props.create(Actor.class));
+        //ActorRef httpActor = sys.actorOf(Props.create(HttpActor.class));
         Http http = Http.get(sys);
         int serverPort = Integer.parseInt(args[0]);
 
