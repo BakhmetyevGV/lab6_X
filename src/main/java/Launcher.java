@@ -36,18 +36,18 @@ public class Launcher {
         };
 
         ZookeeperService zookeeperService = new ZookeeperService();
-        //zookeeperService.createClientNode();
-        //zookeeperService.createServerNode();
+        zookeeperService.createClientNode();
+        zookeeperService.createServerNode();
 
 
-        //Server server = new Server(serverPort);
+        Server server = new Server(serverPort);
 
-        ZooKeeper zk = zookeeperService.zk;
-        zk.delete("/clientQueue/msg",
-                zk.exists("/clientQueue/msg", false).getVersion());
-
-        zk.delete("/clientQueue", zk.exists("/clientQueue", false).getVersion());
-        zk.delete("/serverQueue", zk.exists("/serverQueue", false).getVersion());
+//        ZooKeeper zk = zookeeperService.zk;
+//        zk.delete("/clientQueue/msg",
+//                zk.exists("/clientQueue/msg", false).getVersion());
+//
+//        zk.delete("/clientQueue", zk.exists("/clientQueue", false).getVersion());
+//        zk.delete("/serverQueue", zk.exists("/serverQueue", false).getVersion());
 
         //zk.exists(znodePath, clientWatcher);
 
@@ -72,11 +72,11 @@ public class Launcher {
 //        }
 
 
-//        if(serverPort == 8095) {
-//            System.in.read();
-//        } else{
-//            server.msgFromClient();
-//        }
+        if(serverPort == 8095) {
+            System.in.read();
+        } else{
+            server.msgFromClient();
+        }
     }
 }
 

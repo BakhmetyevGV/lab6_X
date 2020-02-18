@@ -64,7 +64,7 @@ public class Server extends AllDirectives {
                     if (mode == CLIENT_MODE) {
                         System.out.println(new String(data, "UTF-8"));
                     } else if (mode == SERVER_MODE) {
-//                        handleHttp(new String(data, "UTF-8"));
+                        zookeeperService.msgFromServer();
                     }
 
 
