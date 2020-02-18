@@ -71,7 +71,7 @@ public class Launcher {
             zooKeeper.delete(znodePath2, 0);
             zooKeeper.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
         }
-        lock2.wait();
+
 
 
         //byte[] data = zooKeeper.getData(znodePath2, null, null);
