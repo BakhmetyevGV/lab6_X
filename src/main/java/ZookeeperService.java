@@ -58,7 +58,7 @@ public class ZookeeperService {
 
             byte[] data = zk.getData("/clientQueue/msg", null, null);
             zk.delete("/clientQueue/msg", zk.exists("/clientQueue/msg", false).getVersion());
-            zk.create("/serverQueue/msg", ArrayUtil"answer to:".getBytes())
+            zk.create("/serverQueue/msg", ArrayUtils"answer to:".getBytes())
 
         } catch (KeeperException | InterruptedException e) {
             e.printStackTrace();
