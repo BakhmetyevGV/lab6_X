@@ -92,7 +92,7 @@ public class Launcher {
 
 
         System.out.println(zooKeeper.getChildren(znodePath2, false));
-
+        System.in.read();
     }
 }
 
