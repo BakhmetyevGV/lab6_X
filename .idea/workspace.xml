@@ -43,19 +43,11 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="RunManager" selected="Application.Unnamed">
+  <component name="RunManager" selected="Application.test">
     <configuration name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Launcher" />
       <module name="lab6" />
       <option name="PROGRAM_PARAMETERS" value="8093" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Launcher" />
-      <module name="lab6" />
-      <option name="PROGRAM_PARAMETERS" value="8094" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -68,10 +60,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="test" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Launcher" />
+      <module name="lab6" />
+      <option name="PROGRAM_PARAMETERS" value="8095" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="test" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Launcher" />
+      <module name="lab6" />
+      <option name="PROGRAM_PARAMETERS" value="8095" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="Application.Unnamed" />
       <item itemvalue="Application.server3" />
-      <item itemvalue="Application.Launcher" />
+      <item itemvalue="Application.test" />
     </list>
     <recent_temporary>
       <list>
@@ -121,10 +128,10 @@
       <screen x="53" y="24" width="1313" height="744" />
     </state>
     <state x="308" y="44" key="#Project_Structure/53.24.1313.744@53.24.1313.744" timestamp="1577525070234" />
-    <state x="173" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1577531518573">
+    <state x="173" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582028113058">
       <screen x="53" y="24" width="1313" height="744" />
     </state>
-    <state x="173" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog/53.24.1313.744@53.24.1313.744" timestamp="1577531518573" />
+    <state x="173" y="41" key="#com.intellij.execution.impl.EditConfigurationsDialog/53.24.1313.744@53.24.1313.744" timestamp="1582028113058" />
     <state x="446" y="169" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1577531508789">
       <screen x="53" y="24" width="1313" height="744" />
     </state>
