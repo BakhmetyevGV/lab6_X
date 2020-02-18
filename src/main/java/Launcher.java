@@ -10,13 +10,6 @@ import org.apache.zookeeper.data.ACL;
 import java.io.IOException;
 import java.util.List;
 
-class Server extends AllDirectives {
-    private Http http;
-
-    public Server(final Http http, int port) {
-
-    }
-}
 
 public class Launcher {
     private static final String ZOOKEEPER_SERVER = "127.0.0.1:2181";

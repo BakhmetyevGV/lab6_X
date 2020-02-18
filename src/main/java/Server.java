@@ -1,4 +1,10 @@
-package PACKAGE_NAME;
+import akka.http.javadsl.Http;
+import akka.http.javadsl.server.AllDirectives;
 
-public class Server {
+public class Server extends AllDirectives {
+    private Http http;
+
+    public Server(final Http http, int port) {
+
+    }
 }
