@@ -55,6 +55,7 @@ public class ZookeeperService {
         try {
             List<String> msg = zk.getChildren("/clientQueue", watchedEvent -> {
                 if (watchedEvent.getType() == Watcher.Event.EventType.NodeCreated) {
+                    System.out.println("NODE CREATED IN CLIENT QUEUE");
                     watchServers2();
                 }
             });
