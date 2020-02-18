@@ -2,6 +2,7 @@ import akka.actor.ActorRef;
 import akka.dispatch.sysmsg.Watch;
 import akka.http.javadsl.Http;
 import akka.http.javadsl.server.AllDirectives;
+import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper;
 
@@ -17,6 +18,7 @@ public class Server extends AllDirectives {
     private ZooKeeper zk;
 
     private Watcher watcher;
+    private static final String NODE_PATH;
 
     public Server(final Http http, int port, ActorRef httpActor) throws IOException {
         this.http = http;
@@ -25,37 +27,46 @@ public class Server extends AllDirectives {
         this.zookeeperService = new ZookeeperService(httpActor);
         this.zk = this.zookeeperService.zk;
 
-        switch (port){
+        switch (port) {
             case 8094:
-                watcher = we ->{
-                    if(we.getType() == Watcher.Event.EventType.NodeCreated){
-                        zk.getData("/serverQueue/msg", true, zk.exists("/serverQueue/msg", true));
+                NODE_PATH = "/serverQueue";
+
+                watcher = we -> {
+                    if (we.getType() == Watcher.Event.EventType.NodeCreated) {
+                        try {
+                            zk.getData("/serverQueue/msg",
+                                    true,
+                                    zk.exists("/serverQueue/msg", true));
+
+                        } catch (KeeperException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    try {
+                        watchNodes();
+                    } catch (KeeperException | InterruptedException e) {
+                        e.printStackTrace();
                     }
                 };
                 /*...*/
                 break;
             case 8095:
+                NODE_PATH = "/clientQueue";
+
                 /*...*/
                 break;
             default:
+                NODE_PATH = "crap";
                 System.out.println("Fuck this shit im out");
                 System.exit(-1);
         }
 
     }
+    private void watchNodes() throws KeeperException, InterruptedException {
+        zk.exists("/serverQueue", watcher);
+    }
 
-
-
-    private void poseAsClient(){
-        Watcher serverWatcher = we-> {
-            if(we.getType() == Watcher.Event.EventType.NodeCreated){
-                /*...*/
-                zk.exists("/serverQueue", serverWatcher)
-            }
-
-
-        }
-
-        zookeeperService.createServerNode(serverWatcher);
+    private void poseAsClient() throws KeeperException, InterruptedException {
+        zookeeperService.createServerNode(watcher);
     }
 }
