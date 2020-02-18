@@ -48,7 +48,7 @@ public class Launcher {
 
         zk.delete("/clientQueue", zk.exists("/clientQueue", false).getVersion());
         zk.delete("/serverQueue", zk.exists("/serverQueue", false).getVersion());
-        
+
         //zk.exists(znodePath, clientWatcher);
 
 //        String znodePath2 = "/clientQueue/msg";
