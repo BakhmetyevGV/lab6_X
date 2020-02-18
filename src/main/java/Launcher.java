@@ -58,24 +58,26 @@ public class Launcher {
         }
 
 
-        String znodePath2 = "/clientQueue/msg";
-        if (zk.exists(znodePath2, false) == null) {
-            zk.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
-        } else {
-            zk.delete(znodePath2, zk.exists(znodePath2, true).getVersion());
-            zk.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
-        }
+        zk.
 
-
-        byte[] data = zk.getData(znodePath, null, null);
-        System.out.println("Result: " + new String(data, "UTF-8"));
-
-        byte[] data2 = zk.getData(znodePath2, null, null);
-        System.out.println("Result2: " + new String(data2, "UTF-8"));
-
-        for(String node : zk.getChildren(znodePath, false)){
-            System.out.println(node);
-        }
+//        String znodePath2 = "/clientQueue/msg";
+//        if (zk.exists(znodePath2, false) == null) {
+//            zk.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
+//        } else {
+//            zk.delete(znodePath2, zk.exists(znodePath2, true).getVersion());
+//            zk.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
+//        }
+//
+//
+//        byte[] data = zk.getData(znodePath, null, null);
+//        System.out.println("Result: " + new String(data, "UTF-8"));
+//
+//        byte[] data2 = zk.getData(znodePath2, null, null);
+//        System.out.println("Result2: " + new String(data2, "UTF-8"));
+//
+//        for(String node : zk.getChildren(znodePath, false)){
+//            System.out.println(node);
+//        }
 
 
         //System.in.read();
