@@ -77,8 +77,7 @@ public class Launcher {
         zookeeperService.createServerNode();
 
         ZooKeeper zk = zookeeperService.zk;
-
-        Object lock = new Object();
+        
         if(serverPort == 8094){
             Scanner sc = new Scanner(System.in);
 
