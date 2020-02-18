@@ -39,7 +39,10 @@ public class Launcher {
         };
 
         Watcher clientWatcher = we -> {
-            System.out.println("change in clientQueue");
+            if(we.getType() == Watcher.Event.EventType.NodeCreated)
+                System.out.println("Node Created in clientQueue");
+            else
+                System.out.println("Something else");
         };
 
         ZooKeeper zk = new ZooKeeper(ZOOKEEPER_SERVER, SESSION_TIMEOUT, connectionWatcher);
