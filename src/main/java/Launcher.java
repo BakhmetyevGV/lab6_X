@@ -19,12 +19,10 @@ public class Launcher {
         Http http = Http.get(sys);
         int serverPort = Integer.parseInt(args[0]);
 
-
         Watcher connectionWatcher = we -> {
             if (we.getState() == Watcher.Event.KeeperState.SyncConnected) {
                 System.out.println("Connected to Zookeeper in " + Thread.currentThread().getName());
             }
-
         };
 
         Watcher clientWatcher = we -> {
@@ -43,24 +41,17 @@ public class Launcher {
 //        zk.delete(znodePath + "/msg0000000022",
 //                zk.exists(znodePath + "/msg0000000022", false).getVersion());
 
-//        for(String node : zk.getChildren(znodePath, false)){
-//            System.out.println(node);
-//        }
-
-        String znodePath = "/clientQueue";
-        if (zk.exists(znodePath, false) == null) {
-            zk.create(znodePath, "data".getBytes(), ACLS, CreateMode.PERSISTENT);
-        }
-
         //zk.exists(znodePath, clientWatcher);
 
-        String znodePath2 = "/clientQueue/msg";
-        if (zk.exists(znodePath2, clientWatcher) == null) {
-            zk.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
-        } else {
-            zk.delete(znodePath2, zk.exists(znodePath2, false).getVersion());
-            zk.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
-        }
+//        String znodePath2 = "/clientQueue/msg";
+//        if (zk.exists(znodePath2, clientWatcher) == null) {
+//            zk.create(znodePath2, "test1".getBytes(), ACLS, CreateMode.PERSISTENT);
+//        } else {
+//            zk.delete(znodePath2, zk.exists(znodePath2, false).getVersion());
+//            zk.create(znodePath2, "test2".getBytes(), ACLS, CreateMode.PERSISTENT);
+//        }
+
+
 
 //        byte[] data = zk.getData(znodePath, null, null);
 //        System.out.println("Result: " + new String(data, "UTF-8"));
